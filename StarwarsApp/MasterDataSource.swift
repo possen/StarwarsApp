@@ -50,9 +50,26 @@ class MasterDataSource: NSObject, UITableViewDataSource, UITableViewDelegate {
         return objects[indexPath.row]
     }
     
-    func search(tableView: UITableView, query: String) {
-        networkController.search(query: query) { results in
-            self.objects = results
+    func search(tableView: UITableView, query: String, filter: String) {
+        networkController.search(query: query, filter: filter) { results in
+            // presentation object wrap model objects,
+            // to keep a clear separation of model and presentation code and associated dependencies.
+            self.objects = results.map {
+                switch $0 {
+                case let model as Person:
+                    return PersonPresenter(model: model)
+                case let model as Film:
+                    return FilmPresenter(model: model)
+                case let model as Starship:
+                    return StarshipPresenter(model: model)
+                case let model as Planet:
+                    return PlanetPresenter(model: model)
+                case let model as Vehicle:
+                    return VehiclePresenter(model: model)
+                default:
+                    fatalError("unsupported data")
+                }
+            }
             tableView.reloadData()
         }
     }

@@ -19,9 +19,11 @@ class MasterViewController: UITableViewController {
         "vehicles/",
         "starships/"
     ]
+    var currentQuery = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        currentQuery = sections[0]
         tableView.delegate = masterDataSource
         tableView.dataSource = masterDataSource
         searchBar.delegate = self
@@ -30,6 +32,7 @@ class MasterViewController: UITableViewController {
             let nav = controllers[controllers.count-1] as! UINavigationController
             detailViewController = nav.topViewController as? DetailViewController
         }
+        masterDataSource.search(tableView: tableView, query: sections[0], filter: "")
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -57,16 +60,17 @@ class MasterViewController: UITableViewController {
 extension MasterViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        
+        masterDataSource.search(tableView: tableView, query: currentQuery, filter: searchText)
     }
 
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        
+        masterDataSource.search(tableView: tableView, query: currentQuery, filter: searchBar.text ?? "")
     }
     
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
         let path = sections[selectedScope]
-        masterDataSource.search(tableView: tableView, query: path)
+        currentQuery = path
+        masterDataSource.search(tableView: tableView, query: path, filter: "")
     }
 }
 

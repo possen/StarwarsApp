@@ -18,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
+        // NOTE: Comment out following lines to disable logging.
         let console = ConsoleDestination()  // log to Xcode Console
         log.addDestination(console)
         return true

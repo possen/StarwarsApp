@@ -54,30 +54,97 @@ struct NetworkController {
         session.dateDecodingStrategy = .custom(Self.specialDateDecoder)
     }
     
-    func search(query: String, completion: @escaping ([Any]) -> Void)  {
+    
+    func search(query: String, filter: String, completion: @escaping ([Any]) -> Void) {
+
+        // TODO: in a real app would not load all data, it would page on demand,
+        // but since data is small and time is short, just going to load it all here
+        // TODO: probably would like to figure out a way to reduce duplication here.
+        // NOTE: this is being performed using a coroutine so it does not block main thread. 
+        
+        func fetchPeople(filter: String) throws {
+            let request = JSONRequest<People, ErrorResponse>(method: .get, path: query, session: self.session)
+            var result = try request.perform(parameters: ["search": filter]).await()
+            while result.results.count < result.count {
+                guard let next = result.next else {
+                    break
+                }
+                let request = JSONRequest<People, ErrorResponse>(method: .get, url: next, session: self.session)
+                let nextResult = try request.perform().await()
+                result.results += nextResult.results
+            }
+            completion(result.results)
+        }
+        
+        func fetchPlanets(filter: String) throws {
+            let request = JSONRequest<Planets, ErrorResponse>(method: .get, path: query, session: self.session)
+            var result = try request.perform(parameters: ["search": filter]).await()
+            while result.results.count < result.count {
+                guard let next = result.next else {
+                    break
+                }
+                let request = JSONRequest<Planets, ErrorResponse>(method: .get, url: next, session: self.session)
+                let nextResult = try request.perform().await()
+                result.results += nextResult.results
+            }
+            completion(result.results)
+        }
+        
+        func fetchFilms(filter: String) throws {
+            let request = JSONRequest<Films, ErrorResponse>(method: .get, path: query, session: self.session)
+            var result = try request.perform(parameters: ["search": filter]).await()
+            while result.results.count < result.count {
+                guard let next = result.next else {
+                    break
+                }
+                let request = JSONRequest<Films, ErrorResponse>(method: .get, url: next, session: self.session)
+                let nextResult = try request.perform().await()
+                result.results += nextResult.results
+            }
+            completion(result.results)
+        }
+        
+        func fetchVehicles(filter: String) throws {
+            let request = JSONRequest<Vehicles, ErrorResponse>(method: .get, path: query, session: self.session)
+            var result = try request.perform( parameters: ["search": filter]).await()
+            while result.results.count < result.count {
+                guard let next = result.next else {
+                    break
+                }
+                let request = JSONRequest<Vehicles, ErrorResponse>(method: .get, url: next, session: self.session)
+                let nextResult = try request.perform().await()
+                result.results += nextResult.results
+            }
+            completion(result.results)
+        }
+        
+        func fetchStarships(filter: String) throws {
+            let request = JSONRequest<Starships, ErrorResponse>(method: .get, path: query, session: self.session)
+            var result = try request.perform(parameters: ["search": filter]).await()
+            while result.results.count < result.count {
+                guard let next = result.next else {
+                    break
+                }
+                let request = JSONRequest<Starships, ErrorResponse>(method: .get, url: next, session: self.session)
+                let nextResult = try request.perform().await()
+                result.results += nextResult.results
+            }
+            completion(result.results)
+        }
+
         DispatchQueue.main.startCoroutine {
             do {
                 switch query {
                 case "people/":
-                    let request = JSONRequest<People, ErrorResponse>(method: .get, path: query, session: self.session)
-                    let result = try request.perform().await()
-                    completion(result.results)
+                    try fetchPeople(filter: filter)
                 case "planets/":
-                    let request = JSONRequest<Planets, ErrorResponse>(method: .get, path: query, session: self.session)
-                    let result = try request.perform().await()
-                    completion(result.results)
+                    try fetchPlanets(filter: filter)
                 case "films/":
-                    let request = JSONRequest<Films, ErrorResponse>(method: .get, path: query, session: self.session)
-                    let result = try request.perform().await()
-                    completion(result.results)
+                    try fetchFilms(filter: filter)
                 case "vehicles/":
-                    let request = JSONRequest<Vehicles, ErrorResponse>(method: .get, path: query, session: self.session)
-                    let result = try request.perform().await()
-                    completion(result.results)
+                    try fetchVehicles(filter: filter)
                 case "starships/":
-                    let request = JSONRequest<Starships, ErrorResponse>(method: .get, path: query, session: self.session)
-                    let result = try request.perform().await()
-                    completion(result.results)
+                    try fetchStarships(filter: filter)
                 default:
                     fatalError("unsupported data type")
                 }

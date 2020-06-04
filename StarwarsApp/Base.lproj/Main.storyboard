@@ -31,19 +31,27 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Starwars" translatesAutoresizingMaskIntoConstraints="NO" id="fca-vJ-J5m">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </imageView>
                             <label clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="Detail view content goes here" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="0XM-y9-sOw">
-                                <rect key="frame" x="20" y="293" width="374" height="296"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <rect key="frame" x="20" y="568" width="374" height="294"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="lightTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="0XM-y9-sOw" firstAttribute="leading" secondItem="svH-Pt-448" secondAttribute="leadingMargin" id="7oF-ka-6xc"/>
-                            <constraint firstItem="VUw-jc-0yf" firstAttribute="bottom" secondItem="0XM-y9-sOw" secondAttribute="bottom" constant="273" id="XLW-si-5df"/>
+                            <constraint firstItem="fca-vJ-J5m" firstAttribute="top" secondItem="VUw-jc-0yf" secondAttribute="top" constant="-88" id="FyW-Sq-3S1"/>
+                            <constraint firstItem="VUw-jc-0yf" firstAttribute="bottom" secondItem="0XM-y9-sOw" secondAttribute="bottom" id="XLW-si-5df"/>
                             <constraint firstItem="0XM-y9-sOw" firstAttribute="trailing" secondItem="svH-Pt-448" secondAttribute="trailingMargin" id="gWQ-AV-aqH"/>
-                            <constraint firstItem="0XM-y9-sOw" firstAttribute="top" secondItem="VUw-jc-0yf" secondAttribute="top" constant="205" id="sSo-yT-Nrl"/>
+                            <constraint firstItem="VUw-jc-0yf" firstAttribute="bottom" secondItem="fca-vJ-J5m" secondAttribute="bottom" constant="-34" id="pjr-hE-dmR"/>
+                            <constraint firstItem="VUw-jc-0yf" firstAttribute="trailing" secondItem="fca-vJ-J5m" secondAttribute="trailing" id="rTa-mI-mrc"/>
+                            <constraint firstItem="0XM-y9-sOw" firstAttribute="top" secondItem="VUw-jc-0yf" secondAttribute="top" constant="480" id="sSo-yT-Nrl"/>
+                            <constraint firstItem="fca-vJ-J5m" firstAttribute="leading" secondItem="VUw-jc-0yf" secondAttribute="leading" id="wjC-Bs-SFO"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="VUw-jc-0yf"/>
                     </view>
@@ -148,4 +156,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="6S0-TO-JiA"/>
     </inferredMetricsTieBreakers>
+    <resources>
+        <image name="Starwars" width="1920" height="1012"/>
+    </resources>
 </document>
