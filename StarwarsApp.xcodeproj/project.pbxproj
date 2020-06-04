@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -16,6 +16,17 @@
 		D580D54A24873CDC001B9AFD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D580D54824873CDC001B9AFD /* LaunchScreen.storyboard */; };
 		D580D55524873CDC001B9AFD /* StarwarsAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D580D55424873CDC001B9AFD /* StarwarsAppTests.swift */; };
 		D580D56024873CDC001B9AFD /* StarwarsAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D580D55F24873CDC001B9AFD /* StarwarsAppUITests.swift */; };
+		D580D56E24874A9A001B9AFD /* MasterDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D580D56D24874A9A001B9AFD /* MasterDataSource.swift */; };
+		D5D3599424877D79005BCA47 /* TODO.md in Resources */ = {isa = PBXBuildFile; fileRef = D5D3599324877D79005BCA47 /* TODO.md */; };
+		D5D3599624878D2D005BCA47 /* People.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D3599524878D2D005BCA47 /* People.swift */; };
+		D5D35998248895D3005BCA47 /* Planets.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D35997248895D3005BCA47 /* Planets.swift */; };
+		D5D3599A2488BDB6005BCA47 /* Films.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D359992488BDB6005BCA47 /* Films.swift */; };
+		D5D3599C2488BEE3005BCA47 /* Starships.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D3599B2488BEE3005BCA47 /* Starships.swift */; };
+		D5D3599E2488BFE1005BCA47 /* Vehicles.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D3599D2488BFE1005BCA47 /* Vehicles.swift */; };
+		D5D359A02488E56A005BCA47 /* AttributeConvertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D3599F2488E56A005BCA47 /* AttributeConvertable.swift */; };
+		D5D359A22488F708005BCA47 /* ReadMe.md in Resources */ = {isa = PBXBuildFile; fileRef = D5D359A12488F708005BCA47 /* ReadMe.md */; };
+		D5E6E78D248772D3005AD175 /* ResonanceKit in Frameworks */ = {isa = PBXBuildFile; productRef = D5E6E78C248772D3005AD175 /* ResonanceKit */; };
+		D5E6E78F248776CD005AD175 /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E6E78E248776CD005AD175 /* NetworkController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +62,16 @@
 		D580D55B24873CDC001B9AFD /* StarwarsAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StarwarsAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D580D55F24873CDC001B9AFD /* StarwarsAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarwarsAppUITests.swift; sourceTree = "<group>"; };
 		D580D56124873CDC001B9AFD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D580D56D24874A9A001B9AFD /* MasterDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterDataSource.swift; sourceTree = "<group>"; };
+		D5D3599324877D79005BCA47 /* TODO.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = TODO.md; sourceTree = "<group>"; };
+		D5D3599524878D2D005BCA47 /* People.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = People.swift; sourceTree = "<group>"; };
+		D5D35997248895D3005BCA47 /* Planets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Planets.swift; sourceTree = "<group>"; };
+		D5D359992488BDB6005BCA47 /* Films.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Films.swift; sourceTree = "<group>"; };
+		D5D3599B2488BEE3005BCA47 /* Starships.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Starships.swift; sourceTree = "<group>"; };
+		D5D3599D2488BFE1005BCA47 /* Vehicles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vehicles.swift; sourceTree = "<group>"; };
+		D5D3599F2488E56A005BCA47 /* AttributeConvertable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributeConvertable.swift; sourceTree = "<group>"; };
+		D5D359A12488F708005BCA47 /* ReadMe.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = ReadMe.md; sourceTree = "<group>"; };
+		D5E6E78E248776CD005AD175 /* NetworkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +79,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D5E6E78D248772D3005AD175 /* ResonanceKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,6 +103,8 @@
 		D580D52F24873CDB001B9AFD = {
 			isa = PBXGroup;
 			children = (
+				D5D359A12488F708005BCA47 /* ReadMe.md */,
+				D5D3599324877D79005BCA47 /* TODO.md */,
 				D580D53A24873CDB001B9AFD /* StarwarsApp */,
 				D580D55324873CDC001B9AFD /* StarwarsAppTests */,
 				D580D55E24873CDC001B9AFD /* StarwarsAppUITests */,
@@ -104,7 +128,15 @@
 				D580D53B24873CDB001B9AFD /* AppDelegate.swift */,
 				D580D53D24873CDB001B9AFD /* SceneDelegate.swift */,
 				D580D53F24873CDB001B9AFD /* MasterViewController.swift */,
+				D580D56D24874A9A001B9AFD /* MasterDataSource.swift */,
+				D5E6E78E248776CD005AD175 /* NetworkController.swift */,
 				D580D54124873CDB001B9AFD /* DetailViewController.swift */,
+				D5D3599F2488E56A005BCA47 /* AttributeConvertable.swift */,
+				D5D3599524878D2D005BCA47 /* People.swift */,
+				D5D359992488BDB6005BCA47 /* Films.swift */,
+				D5D3599B2488BEE3005BCA47 /* Starships.swift */,
+				D5D35997248895D3005BCA47 /* Planets.swift */,
+				D5D3599D2488BFE1005BCA47 /* Vehicles.swift */,
 				D580D54324873CDB001B9AFD /* Main.storyboard */,
 				D580D54624873CDC001B9AFD /* Assets.xcassets */,
 				D580D54824873CDC001B9AFD /* LaunchScreen.storyboard */,
@@ -147,6 +179,9 @@
 			dependencies = (
 			);
 			name = StarwarsApp;
+			packageProductDependencies = (
+				D5E6E78C248772D3005AD175 /* ResonanceKit */,
+			);
 			productName = StarwarsApp;
 			productReference = D580D53824873CDB001B9AFD /* StarwarsApp.app */;
 			productType = "com.apple.product-type.application";
@@ -219,6 +254,9 @@
 				Base,
 			);
 			mainGroup = D580D52F24873CDB001B9AFD;
+			packageReferences = (
+				D5E6E78B248772D3005AD175 /* XCRemoteSwiftPackageReference "ResonanceKit" */,
+			);
 			productRefGroup = D580D53924873CDB001B9AFD /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -235,9 +273,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D5D3599424877D79005BCA47 /* TODO.md in Resources */,
 				D580D54A24873CDC001B9AFD /* LaunchScreen.storyboard in Resources */,
 				D580D54724873CDC001B9AFD /* Assets.xcassets in Resources */,
 				D580D54524873CDB001B9AFD /* Main.storyboard in Resources */,
+				D5D359A22488F708005BCA47 /* ReadMe.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -262,10 +302,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D580D56E24874A9A001B9AFD /* MasterDataSource.swift in Sources */,
 				D580D53C24873CDB001B9AFD /* AppDelegate.swift in Sources */,
+				D5D359A02488E56A005BCA47 /* AttributeConvertable.swift in Sources */,
+				D5E6E78F248776CD005AD175 /* NetworkController.swift in Sources */,
 				D580D53E24873CDB001B9AFD /* SceneDelegate.swift in Sources */,
 				D580D54024873CDB001B9AFD /* MasterViewController.swift in Sources */,
 				D580D54224873CDB001B9AFD /* DetailViewController.swift in Sources */,
+				D5D3599624878D2D005BCA47 /* People.swift in Sources */,
+				D5D3599C2488BEE3005BCA47 /* Starships.swift in Sources */,
+				D5D3599A2488BDB6005BCA47 /* Films.swift in Sources */,
+				D5D3599E2488BFE1005BCA47 /* Vehicles.swift in Sources */,
+				D5D35998248895D3005BCA47 /* Planets.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -594,6 +642,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D5E6E78B248772D3005AD175 /* XCRemoteSwiftPackageReference "ResonanceKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:possen/ResonanceKit.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D5E6E78C248772D3005AD175 /* ResonanceKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D5E6E78B248772D3005AD175 /* XCRemoteSwiftPackageReference "ResonanceKit" */;
+			productName = ResonanceKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = D580D53024873CDB001B9AFD /* Project object */;
 }
