@@ -7,6 +7,11 @@
 - Click on item of interest
 - Type in search field to filter
 
+## How to Build
+- Should just work, after a delay getting the SPM packages. 
+- Please let me know if you have any difficulty building, it is working for me,
+- I am building with Xcode 11.5
+
 ## Design
 - Decided to go with master detail layout.
 - I tried to be careful about separating model, view and controller layers

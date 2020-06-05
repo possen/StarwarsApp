@@ -54,6 +54,7 @@
 
 /* Begin PBXFileReference section */
 		D56CFFEE24898EE400C101B0 /* Mocks */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Mocks; sourceTree = "<group>"; };
+		D56CFFF02489AF3500C101B0 /* ResonanceKit */ = {isa = PBXFileReference; lastKnownFileType = folder; name = ResonanceKit; path = ../ResonanceKit; sourceTree = "<group>"; };
 		D580D53824873CDB001B9AFD /* StarwarsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StarwarsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D580D53B24873CDB001B9AFD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D580D53D24873CDB001B9AFD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -115,6 +116,7 @@
 		D580D52F24873CDB001B9AFD = {
 			isa = PBXGroup;
 			children = (
+				D56CFFF02489AF3500C101B0 /* ResonanceKit */,
 				D5D359A12488F708005BCA47 /* ReadMe.md */,
 				D5D3599324877D79005BCA47 /* TODO.md */,
 				D580D53A24873CDB001B9AFD /* StarwarsApp */,
