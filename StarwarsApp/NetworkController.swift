@@ -57,20 +57,30 @@ struct NetworkController {
     
     func search(query: String, filter: String, completion: @escaping ([Any]) -> Void) {
 
+        func fixURL(_ url: URL?) -> URL? {
+            var comp = URLComponents()
+            comp.scheme = "https"
+            comp.host = url?.host
+            comp.path = url?.path ?? ""
+            comp.query = url?.query
+            return comp.url
+        }
+        
         // TODO: in a real app would not load all data, it would page on demand,
         // but since data is small and time is short, just going to load it all here
         // TODO: probably would like to figure out a way to reduce duplication here.
-        // NOTE: this is being performed using a coroutine so it does not block main thread. 
+        // NOTE: this is being performed using a coroutine so it does not block main thread.
         
         func fetchPeople(filter: String) throws {
             let request = JSONRequest<People, ErrorResponse>(method: .get, path: query, session: self.session)
             var result = try request.perform(parameters: ["search": filter]).await()
-            while result.results.count < result.count {
-                guard let next = result.next else {
+            let nextResult = result
+            while result.results.count < nextResult.count {
+                guard let next = fixURL(nextResult.next) else {
                     break
                 }
-                let request = JSONRequest<People, ErrorResponse>(method: .get, url: next, session: self.session)
-                let nextResult = try request.perform().await()
+                let request = JSONRequest<People, ErrorResponse>(method: .get, path: query, session: self.session)
+                let nextResult = try request.perform(url: next).await()
                 result.results += nextResult.results
             }
             completion(result.results)
@@ -79,12 +89,13 @@ struct NetworkController {
         func fetchPlanets(filter: String) throws {
             let request = JSONRequest<Planets, ErrorResponse>(method: .get, path: query, session: self.session)
             var result = try request.perform(parameters: ["search": filter]).await()
-            while result.results.count < result.count {
-                guard let next = result.next else {
+            let nextResult = result
+            while result.results.count < nextResult.count {
+                guard let next = fixURL(result.next) else {
                     break
                 }
-                let request = JSONRequest<Planets, ErrorResponse>(method: .get, url: next, session: self.session)
-                let nextResult = try request.perform().await()
+                let request = JSONRequest<Planets, ErrorResponse>(method: .get, path: query, session: self.session)
+                let nextResult = try request.perform(url: next).await()
                 result.results += nextResult.results
             }
             completion(result.results)
@@ -93,12 +104,13 @@ struct NetworkController {
         func fetchFilms(filter: String) throws {
             let request = JSONRequest<Films, ErrorResponse>(method: .get, path: query, session: self.session)
             var result = try request.perform(parameters: ["search": filter]).await()
-            while result.results.count < result.count {
-                guard let next = result.next else {
+            let nextResult = result
+            while result.results.count < nextResult.count {
+                guard let next = fixURL(result.next) else {
                     break
                 }
-                let request = JSONRequest<Films, ErrorResponse>(method: .get, url: next, session: self.session)
-                let nextResult = try request.perform().await()
+                let request = JSONRequest<Films, ErrorResponse>(method: .get, path: query, session: self.session)
+                let nextResult = try request.perform(url: next).await()
                 result.results += nextResult.results
             }
             completion(result.results)
@@ -107,12 +119,13 @@ struct NetworkController {
         func fetchVehicles(filter: String) throws {
             let request = JSONRequest<Vehicles, ErrorResponse>(method: .get, path: query, session: self.session)
             var result = try request.perform( parameters: ["search": filter]).await()
-            while result.results.count < result.count {
-                guard let next = result.next else {
+            let nextResult = result
+            while result.results.count < nextResult.count {
+                guard let next = fixURL(result.next) else {
                     break
                 }
-                let request = JSONRequest<Vehicles, ErrorResponse>(method: .get, url: next, session: self.session)
-                let nextResult = try request.perform().await()
+                let request = JSONRequest<Vehicles, ErrorResponse>(method: .get, path: query, session: self.session)
+                let nextResult = try request.perform(url: next).await()
                 result.results += nextResult.results
             }
             completion(result.results)
@@ -121,12 +134,13 @@ struct NetworkController {
         func fetchStarships(filter: String) throws {
             let request = JSONRequest<Starships, ErrorResponse>(method: .get, path: query, session: self.session)
             var result = try request.perform(parameters: ["search": filter]).await()
-            while result.results.count < result.count {
-                guard let next = result.next else {
+            let nextResult = result
+            while result.results.count < nextResult.count {
+                guard let next = fixURL(result.next) else {
                     break
                 }
-                let request = JSONRequest<Starships, ErrorResponse>(method: .get, url: next, session: self.session)
-                let nextResult = try request.perform().await()
+                let request = JSONRequest<Starships, ErrorResponse>(method: .get, path: query, session: self.session)
+                let nextResult = try request.perform(url: next).await()
                 result.results += nextResult.results
             }
             completion(result.results)
