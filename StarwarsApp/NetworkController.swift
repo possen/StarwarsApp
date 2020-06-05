@@ -74,13 +74,13 @@ struct NetworkController {
         func fetchPeople(filter: String) throws {
             let request = JSONRequest<People, ErrorResponse>(method: .get, path: query, session: self.session)
             var result = try request.perform(parameters: ["search": filter]).await()
-            let nextResult = result
+            var nextResult = result
             while result.results.count < nextResult.count {
                 guard let next = fixURL(nextResult.next) else {
                     break
                 }
                 let request = JSONRequest<People, ErrorResponse>(method: .get, path: query, session: self.session)
-                let nextResult = try request.perform(url: next).await()
+                nextResult = try request.perform(url: next).await()
                 result.results += nextResult.results
             }
             completion(result.results)
@@ -89,13 +89,13 @@ struct NetworkController {
         func fetchPlanets(filter: String) throws {
             let request = JSONRequest<Planets, ErrorResponse>(method: .get, path: query, session: self.session)
             var result = try request.perform(parameters: ["search": filter]).await()
-            let nextResult = result
+            var nextResult = result
             while result.results.count < nextResult.count {
-                guard let next = fixURL(result.next) else {
+                guard let next = fixURL(nextResult.next) else {
                     break
                 }
                 let request = JSONRequest<Planets, ErrorResponse>(method: .get, path: query, session: self.session)
-                let nextResult = try request.perform(url: next).await()
+                nextResult = try request.perform(url: next).await()
                 result.results += nextResult.results
             }
             completion(result.results)
@@ -104,13 +104,13 @@ struct NetworkController {
         func fetchFilms(filter: String) throws {
             let request = JSONRequest<Films, ErrorResponse>(method: .get, path: query, session: self.session)
             var result = try request.perform(parameters: ["search": filter]).await()
-            let nextResult = result
+            var nextResult = result
             while result.results.count < nextResult.count {
-                guard let next = fixURL(result.next) else {
+                guard let next = fixURL(nextResult.next) else {
                     break
                 }
                 let request = JSONRequest<Films, ErrorResponse>(method: .get, path: query, session: self.session)
-                let nextResult = try request.perform(url: next).await()
+                nextResult = try request.perform(url: next).await()
                 result.results += nextResult.results
             }
             completion(result.results)
@@ -119,13 +119,13 @@ struct NetworkController {
         func fetchVehicles(filter: String) throws {
             let request = JSONRequest<Vehicles, ErrorResponse>(method: .get, path: query, session: self.session)
             var result = try request.perform( parameters: ["search": filter]).await()
-            let nextResult = result
+            var nextResult = result
             while result.results.count < nextResult.count {
-                guard let next = fixURL(result.next) else {
+                guard let next = fixURL(nextResult.next) else {
                     break
                 }
                 let request = JSONRequest<Vehicles, ErrorResponse>(method: .get, path: query, session: self.session)
-                let nextResult = try request.perform(url: next).await()
+                nextResult = try request.perform(url: next).await()
                 result.results += nextResult.results
             }
             completion(result.results)
@@ -134,13 +134,13 @@ struct NetworkController {
         func fetchStarships(filter: String) throws {
             let request = JSONRequest<Starships, ErrorResponse>(method: .get, path: query, session: self.session)
             var result = try request.perform(parameters: ["search": filter]).await()
-            let nextResult = result
+            var nextResult = result
             while result.results.count < nextResult.count {
-                guard let next = fixURL(result.next) else {
+                guard let next = fixURL(nextResult.next) else {
                     break
                 }
                 let request = JSONRequest<Starships, ErrorResponse>(method: .get, path: query, session: self.session)
-                let nextResult = try request.perform(url: next).await()
+                nextResult = try request.perform(url: next).await()
                 result.results += nextResult.results
             }
             completion(result.results)
