@@ -82,6 +82,7 @@ struct NetworkController {
                 let request = JSONRequest<People, ErrorResponse>(method: .get, path: query, session: self.session)
                 nextResult = try request.perform(url: next).await()
                 result.results += nextResult.results
+        
             }
             completion(result.results)
         }
