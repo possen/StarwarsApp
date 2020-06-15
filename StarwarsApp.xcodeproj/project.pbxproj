@@ -53,6 +53,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D52A777B249822C0001ACC43 /* StarwarsApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = StarwarsApp.entitlements; sourceTree = "<group>"; };
 		D56CFFEE24898EE400C101B0 /* Mocks */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Mocks; sourceTree = "<group>"; };
 		D56CFFF02489AF3500C101B0 /* ResonanceKit */ = {isa = PBXFileReference; lastKnownFileType = folder; name = ResonanceKit; path = ../ResonanceKit; sourceTree = "<group>"; };
 		D580D53824873CDB001B9AFD /* StarwarsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StarwarsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -139,6 +140,7 @@
 		D580D53A24873CDB001B9AFD /* StarwarsApp */ = {
 			isa = PBXGroup;
 			children = (
+				D52A777B249822C0001ACC43 /* StarwarsApp.entitlements */,
 				D580D53B24873CDB001B9AFD /* AppDelegate.swift */,
 				D580D53D24873CDB001B9AFD /* SceneDelegate.swift */,
 				D580D53F24873CDB001B9AFD /* MasterViewController.swift */,
@@ -512,6 +514,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = StarwarsApp/StarwarsApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = UVHFXZWG47;
 				INFOPLIST_FILE = StarwarsApp/Info.plist;
@@ -521,6 +524,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.synthus.StarwarsApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -530,6 +534,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = StarwarsApp/StarwarsApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = UVHFXZWG47;
 				INFOPLIST_FILE = StarwarsApp/Info.plist;
@@ -539,6 +544,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.synthus.StarwarsApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
