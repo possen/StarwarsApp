@@ -2,66 +2,85 @@
 //  PlanetPresenter.swift
 //  StarwarsApp
 //
-//  Created by Paul Ossenbruggen on 6/4/20.
-//  Copyright © 2020 Paul Ossenbruggen. All rights reserved.
 //
 
 import UIKit
 
-struct PlanetPresenter: Decodable, CustomStringConvertible, AttributedConvertable {
+struct PlanetPresenter: CustomStringConvertible, CustomReflectable, Presentable {    
     let model: Planet
     
-    public static var dateFormatter: DateFormatter {
-        let dateFormat = DateFormatter()
-        dateFormat.setLocalizedDateFormatFromTemplate("EEEE, MMM dd YYYY")
-        return dateFormat
+    var customMirror: Mirror {
+        return Mirror(self, children: [
+            "name": name,
+            "rotationPeriod": rotationPeriod,
+            "orbitalPeriod": orbitalPeriod,
+            "diameter": diameter,
+            "climate": climate,
+            "gravity": gravity,
+            "terrain": terrain,
+            "surfaceWater": surfaceWater,
+            "population": population,
+            "createDate": createDate,
+            "editedDate": editedDate,
+
+        ])
     }
-    
+
     var description: String {
         return model.description
     }
+    var count: Int {
+        customMirror.customMirror.children.count
+    }
     
-    var attributed: NSAttributedString {
-        let heading: [NSAttributedString.Key: Any] = [
-            .font : UIFont.systemFont(ofSize: 30),
-            .foregroundColor: UIColor.red
-        ]
-        let label: [NSAttributedString.Key: Any] = [
-            .font : UIFont.boldSystemFont(ofSize: 17),
-            .foregroundColor: UIColor.blue
-        ]
+    subscript(index: Int) -> Any {
+        let children = customMirror.customMirror.children
+        return children[children.index(children.startIndex, offsetBy: index)].value
+    }
+
+    var name: NSAttributedString {
         let result = NSMutableAttributedString()
-        result.append(NSAttributedString(string: model.name, attributes: heading))
-        result.append(NSAttributedString(string: "\n"))
-        result.append(NSAttributedString(string: "Rotation Period: ", attributes: label))
-        result.append(NSAttributedString(string: model.rotationPeriod))
-        result.append(NSAttributedString(string: "\n"))
-        result.append(NSAttributedString(string: "Orbital Period: ", attributes: label))
-        result.append(NSAttributedString(string: model.orbitalPeriod))
-        result.append(NSAttributedString(string: "\n"))
-        result.append(NSAttributedString(string: "Diameter: ", attributes: label))
-        result.append(NSAttributedString(string: model.diameter))
-        result.append(NSAttributedString(string: "\n"))
-        result.append(NSAttributedString(string: "Climate: ", attributes: label))
-        result.append(NSAttributedString(string: model.climate))
-        result.append(NSAttributedString(string: "\n"))
-        result.append(NSAttributedString(string: "Gravity: ", attributes: label))
-        result.append(NSAttributedString(string: model.gravity))
-        result.append(NSAttributedString(string: "\n"))
-        result.append(NSAttributedString(string: "Terrain: ", attributes: label))
-        result.append(NSAttributedString(string: model.terrain))
-        result.append(NSAttributedString(string: "\n"))
-        result.append(NSAttributedString(string: "Surface Water: ", attributes: label))
-        result.append(NSAttributedString(string: model.surfaceWater))
-        result.append(NSAttributedString(string: "\n"))
-        result.append(NSAttributedString(string: "Population: ", attributes: label))
-        result.append(NSAttributedString(string: model.population))
-        result.append(NSAttributedString(string: "\n"))
-        result.append(NSAttributedString(string: "Created: ", attributes: label))
-        result.append(NSAttributedString(string: Self.dateFormatter.string(from: model.created)))
-        result.append(NSAttributedString(string: "\n"))
-        result.append(NSAttributedString(string: "Edited: ", attributes: label))
-        result.append(NSAttributedString(string: Self.dateFormatter.string(from: model.edited)))
+        result.append(NSAttributedString(string: model.name, attributes: PresenterAttr.heading))
         return result
+    }
+
+    var rotationPeriod: NSAttributedString {
+        PresenterAttr.attributed(label: "Rotation Period", value: model.rotationPeriod)
+    }
+    
+    var orbitalPeriod: NSAttributedString {
+        PresenterAttr.attributed(label: "Orbital Period", value: model.orbitalPeriod)
+    }
+
+    var diameter: NSAttributedString {
+        PresenterAttr.attributed(label: "Diameter", value: model.diameter)
+    }
+    
+    var climate: NSAttributedString {
+        PresenterAttr.attributed(label: "Climate", value: model.climate)
+    }
+    
+    var gravity: NSAttributedString {
+        PresenterAttr.attributed(label: "Gravity", value: model.gravity)
+    }
+    
+    var terrain: NSAttributedString {
+        PresenterAttr.attributed(label: "Terrain", value: model.terrain)
+    }
+
+    var surfaceWater: NSAttributedString {
+        PresenterAttr.attributed(label: "Surface Water", value: model.surfaceWater)
+    }
+    
+    var population: NSAttributedString {
+        PresenterAttr.attributed(label: "Population", value: model.population)
+    }
+
+    var createDate: NSAttributedString {
+        PresenterAttr.attributed(label: "Release Date", value: PresenterAttr.dateFormatter.string(from: model.created))
+    }
+    
+    var editedDate: NSAttributedString {
+        PresenterAttr.attributed(label: "Release Date", value: PresenterAttr.dateFormatter.string(from: model.edited))
     }
 }

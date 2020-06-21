@@ -8,69 +8,105 @@
 
 import UIKit
 
-class MasterDataSource: NSObject, UITableViewDataSource, UITableViewDelegate {
-    var objects = [Any]()
+class MasterDataSource {
     let networkController = NetworkController()
+    var pagedPresentables: PagedCollection<Presentable?>!
+    var tableViewAdaptor: TableViewAdaptor!
+    var sectionMain: TableViewAdaptorSection<MasterTableViewCell, PagedCollection<Presentable?>>!
+    let tableView: UITableView
     
-    override init() {
+    struct PresentableResult {
+        let totalCount: Int
+        let results: [Presentable]
     }
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+    lazy var adaptor: TableViewAdaptor = {
+        TableViewAdaptor(tableView: tableView, sections: [sectionMain]) { }
+    }()
+
+    init(tableView: UITableView, query: String) {
+        self.tableView = tableView
+        reset(query: query, filter: "")
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return objects.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        let object = objects[indexPath.row] as? CustomStringConvertible
-        cell.textLabel?.text = object?.description
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    
-    func tableView(
-        _ tableView: UITableView,
-        commit editingStyle: UITableViewCell.EditingStyle,
-        forRowAt indexPath: IndexPath
-    ) {
-        if editingStyle == .delete {
-            objects.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
+    func reset(query: String, filter: String) {
+        pagedPresentables = PagedCollection<Presentable?>(pageSize: 10, maxEntries: 1000)
+        sectionMain = TableViewAdaptorSection<MasterTableViewCell, PagedCollection>(
+            cellReuseIdentifier: "MasterCell",
+            title: "",
+            cellHeight: 65,
+            noDataLabel: "No data.",
+            model: pagedPresentables
+        ) { cell, model, index in
+            guard let model = model else {
+                cell.viewData = nil
+                return
+            }
+            cell.viewData = MasterTableViewCell.ViewData(index: index, model: model)
         }
+        tableViewAdaptor = TableViewAdaptor(tableView: tableView, sections: [sectionMain]) {}
+        pagedPresentables.loadPage = { pageIndex in
+            self.pageLoad(query: query, filter: "", pageIndex: pageIndex, firstLoad: false)
+        }
+        pageLoad(query: query, filter: "", pageIndex: 0, firstLoad: true)
+    }
+    
+    func search(query: String, filter: String) {
+        reset(query: query, filter: filter)
+        tableView.reloadData()
+        pageLoad(query: query, filter: filter, pageIndex: 0, firstLoad: true)
+    }
+
+    func search(query: String, filter: String, page: Int) throws -> PresentableResult {
+        let result = try networkController.search(query: query, filter: filter, page: page)
+        // presentation object wrap model objects,
+        // to keep a clear separation of model and presentation code and associated dependencies.
+        let transformed: [Presentable] = result.results.map {
+            switch $0 {
+            case let model as Person:
+                return PersonPresenter(model: model)
+            case let model as Film:
+                return FilmPresenter(model: model)
+            case let model as Starship:
+                return StarshipPresenter(model: model)
+            case let model as Planet:
+                return PlanetPresenter(model: model)
+            case let model as Vehicle:
+                return VehiclePresenter(model: model)
+            default:
+                fatalError("unsupported data")
+            }
+        }
+        return PresentableResult(totalCount: result.totalCount, results: transformed)
     }
         
-    func object(tableView: UITableView, at indexPath: IndexPath) -> Any {
-        return objects[indexPath.row]
-    }
-    
-    func search(tableView: UITableView, query: String, filter: String) {
-        networkController.search(query: query, filter: filter) { results in
-            // presentation object wrap model objects,
-            // to keep a clear separation of model and presentation code and associated dependencies.
-            self.objects = results.map {
-                switch $0 {
-                case let model as Person:
-                    return PersonPresenter(model: model)
-                case let model as Film:
-                    return FilmPresenter(model: model)
-                case let model as Starship:
-                    return StarshipPresenter(model: model)
-                case let model as Planet:
-                    return PlanetPresenter(model: model)
-                case let model as Vehicle:
-                    return VehiclePresenter(model: model)
-                default:
-                    fatalError("unsupported data")
+    func pageLoad(query: String, filter: String, pageIndex: Int, firstLoad: Bool) {
+        
+        func load() {
+            do {
+                let result = try search(
+                    query: query,
+                    filter: filter,
+                    page: pageIndex + 1
+                )
+                if firstLoad {
+                    pagedPresentables.setInitElements(
+                        itemList: [Presentable?](repeating: nil, count: result.totalCount)
+                    )
                 }
+                let converted = result.results.compactMap { Presentable?($0) }
+                pagedPresentables.replace(pageIndexAt: pageIndex, itemList: converted)
+                tableView.reloadData()
+            } catch {
+                adaptor.errorStr = error.localizedDescription
             }
+            adaptor.loading = false
             tableView.reloadData()
+        }
+                
+        adaptor.loading = true
+        DispatchQueue.main.startCoroutine {
+            load()
         }
     }
 }

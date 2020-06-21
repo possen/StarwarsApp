@@ -54,118 +54,56 @@ struct NetworkController {
         session.dateDecodingStrategy = .custom(Self.specialDateDecoder)
     }
     
+    struct GenericResult {
+        let totalCount: Int
+        let results: [Any]
+    }
     
-    func search(query: String, filter: String, completion: @escaping ([Any]) -> Void) {
-
-        func fixURL(_ url: URL?) -> URL? {
-            var comp = URLComponents()
-            comp.scheme = "https"
-            comp.host = url?.host
-            comp.path = url?.path ?? ""
-            comp.query = url?.query
-            return comp.url
-        }
-        
-        // TODO: in a real app would not load all data, it would page on demand,
-        // but since data is small and time is short, just going to load it all here
-        // TODO: probably would like to figure out a way to reduce duplication here.
-        // NOTE: this is being performed using a coroutine so it does not block main thread.
-        
-        func fetchPeople(filter: String) throws {
+    func search(query: String, filter: String, page: Int) throws -> GenericResult {
+                
+        func fetchPeople(filter: String, page: Int) throws -> People {
             let request = JSONRequest<People, ErrorResponse>(method: .get, path: query, session: self.session)
-            var result = try request.perform(parameters: ["search": filter]).await()
-            var nextResult = result
-            while result.results.count < nextResult.count {
-                guard let next = fixURL(nextResult.next) else {
-                    break
-                }
-                let request = JSONRequest<People, ErrorResponse>(method: .get, path: query, session: self.session)
-                nextResult = try request.perform(url: next).await()
-                result.results += nextResult.results
-        
-            }
-            completion(result.results)
+            return try request.perform(parameters: ["search": filter, "page": String(page)]).await()
         }
         
-        func fetchPlanets(filter: String) throws {
+        func fetchPlanets(filter: String, page: Int) throws -> Planets {
             let request = JSONRequest<Planets, ErrorResponse>(method: .get, path: query, session: self.session)
-            var result = try request.perform(parameters: ["search": filter]).await()
-            var nextResult = result
-            while result.results.count < nextResult.count {
-                guard let next = fixURL(nextResult.next) else {
-                    break
-                }
-                let request = JSONRequest<Planets, ErrorResponse>(method: .get, path: query, session: self.session)
-                nextResult = try request.perform(url: next).await()
-                result.results += nextResult.results
-            }
-            completion(result.results)
+            return try request.perform(parameters: ["search": filter, "page": String(page)]).await()
         }
         
-        func fetchFilms(filter: String) throws {
+        func fetchFilms(filter: String, page: Int) throws -> Films {
             let request = JSONRequest<Films, ErrorResponse>(method: .get, path: query, session: self.session)
-            var result = try request.perform(parameters: ["search": filter]).await()
-            var nextResult = result
-            while result.results.count < nextResult.count {
-                guard let next = fixURL(nextResult.next) else {
-                    break
-                }
-                let request = JSONRequest<Films, ErrorResponse>(method: .get, path: query, session: self.session)
-                nextResult = try request.perform(url: next).await()
-                result.results += nextResult.results
-            }
-            completion(result.results)
+            return try request.perform(parameters: ["search": filter, "page": String(page)]).await()
         }
         
-        func fetchVehicles(filter: String) throws {
+        func fetchVehicles(filter: String, page: Int) throws -> Vehicles {
             let request = JSONRequest<Vehicles, ErrorResponse>(method: .get, path: query, session: self.session)
-            var result = try request.perform( parameters: ["search": filter]).await()
-            var nextResult = result
-            while result.results.count < nextResult.count {
-                guard let next = fixURL(nextResult.next) else {
-                    break
-                }
-                let request = JSONRequest<Vehicles, ErrorResponse>(method: .get, path: query, session: self.session)
-                nextResult = try request.perform(url: next).await()
-                result.results += nextResult.results
-            }
-            completion(result.results)
+            return try request.perform(parameters: ["search": filter, "page": String(page)]).await()
         }
         
-        func fetchStarships(filter: String) throws {
+        func fetchStarships(filter: String, page: Int) throws -> Starships {
             let request = JSONRequest<Starships, ErrorResponse>(method: .get, path: query, session: self.session)
-            var result = try request.perform(parameters: ["search": filter]).await()
-            var nextResult = result
-            while result.results.count < nextResult.count {
-                guard let next = fixURL(nextResult.next) else {
-                    break
-                }
-                let request = JSONRequest<Starships, ErrorResponse>(method: .get, path: query, session: self.session)
-                nextResult = try request.perform(url: next).await()
-                result.results += nextResult.results
-            }
-            completion(result.results)
+            return try request.perform(parameters: ["search": filter, "page": String(page)]).await()
         }
 
-        DispatchQueue.main.startCoroutine {
-            do {
-                switch query {
-                case "people/":
-                    try fetchPeople(filter: filter)
-                case "planets/":
-                    try fetchPlanets(filter: filter)
-                case "films/":
-                    try fetchFilms(filter: filter)
-                case "vehicles/":
-                    try fetchVehicles(filter: filter)
-                case "starships/":
-                    try fetchStarships(filter: filter)
-                default:
-                    fatalError("unsupported data type")
-                }
-            } catch {
-                print(error)
-            }
+        switch query {
+        case "people/":
+            let people = try fetchPeople(filter: filter, page: page)
+            return GenericResult(totalCount: people.count, results: people.results)
+        case "planets/":
+            let planets = try fetchPlanets(filter: filter, page: page)
+            return GenericResult(totalCount: planets.count, results: planets.results)
+        case "films/":
+            let films = try fetchFilms(filter: filter, page: page)
+            return GenericResult(totalCount: films.count, results: films.results)
+        case "vehicles/":
+            let vehicles = try fetchVehicles(filter: filter, page: page)
+            return GenericResult(totalCount: vehicles.count, results: vehicles.results)
+        case "starships/":
+            let starships = try fetchStarships(filter: filter, page: page)
+            return GenericResult(totalCount: starships.count, results: starships.results)
+        default:
+            fatalError("unsupported data type")
         }
     }
 }

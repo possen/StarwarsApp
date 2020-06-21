@@ -1,65 +1,83 @@
 //
-//  PersonPresenter.swift
+//  PeoplePresenter.swift
 //  StarwarsApp
 //
-//  Created by Paul Ossenbruggen on 6/4/20.
+//  Created by Paul Ossenbruggen on 6/18/20.
 //  Copyright © 2020 Paul Ossenbruggen. All rights reserved.
 //
 
 import UIKit
 
-struct PersonPresenter: CustomStringConvertible, AttributedConvertable {
+struct PersonPresenter: CustomStringConvertible, CustomReflectable, Presentable {
     let model: Person
+
+    var customMirror: Mirror {
+        return Mirror(self, children: [
+            "name": name,
+            "birthYear": birthYear,
+            "eyeColor": eyeColor,
+            "height": height,
+            "mass": mass,
+            "skinColor": skinColor,
+            "created": created,
+            "edited": edited,
+            "films": films,
+            "link": link
+        ])
+    }
     
     var description: String {
-        return model.description
+        model.description
+    }
+    var count: Int {
+        customMirror.customMirror.children.count
     }
     
-    public static var dateFormatter: DateFormatter {
-        let dateFormat = DateFormatter()
-        dateFormat.setLocalizedDateFormatFromTemplate("EEEE, MMM dd YYYY")
-        return dateFormat
+    subscript(index: Int) -> Any {
+        let children = customMirror.customMirror.children
+        return children[children.index(children.startIndex, offsetBy: index)].value
     }
-
-    var attributed: NSAttributedString {
-        let heading: [NSAttributedString.Key: Any] = [
-            .font : UIFont.systemFont(ofSize: 30),
-            .foregroundColor: UIColor.red
-        ]
-        let label: [NSAttributedString.Key: Any] = [
-            .font : UIFont.boldSystemFont(ofSize: 17),
-            .foregroundColor: UIColor.blue
-        ]
+    
+    var name: NSAttributedString {
         let result = NSMutableAttributedString()
-        result.append(NSAttributedString(string: model.name, attributes: heading))
-        result.append(NSAttributedString(string: "\n"))
-        result.append(NSAttributedString(string: "Birth Year: ", attributes: label))
-        result.append(NSAttributedString(string: model.birthYear))
-        result.append(NSAttributedString(string: "\n"))
-        result.append(NSAttributedString(string: "Eye Color: ", attributes: label))
-        result.append(NSAttributedString(string: model.eyeColor))
-        result.append(NSAttributedString(string: "\n"))
-        result.append(NSAttributedString(string: "Height: ", attributes: label))
-        result.append(NSAttributedString(string: model.height))
-        result.append(NSAttributedString(string: "\n"))
-        result.append(NSAttributedString(string: "Mass: ", attributes: label))
-        result.append(NSAttributedString(string: model.mass))
-        result.append(NSAttributedString(string: "\n"))
-        result.append(NSAttributedString(string: "Skin Color: ", attributes: label))
-        result.append(NSAttributedString(string: model.skinColor))
-        result.append(NSAttributedString(string: "\n"))
-        result.append(NSAttributedString(string: "Created: ", attributes: label))
-        result.append(NSAttributedString(string: Self.dateFormatter.string(from: model.created)))
-        result.append(NSAttributedString(string: "\n"))
-        result.append(NSAttributedString(string: "Edited: ", attributes: label))
-        result.append(NSAttributedString(string: Self.dateFormatter.string(from: model.edited)))
-        result.append(NSAttributedString(string: "\n"))
-        let link: [NSAttributedString.Key: Any] = [
-            .link: model.url
-        ]
-        result.append(NSAttributedString(string:"URL", attributes: link))
+        result.append(NSAttributedString(string: model.name, attributes: PresenterAttr.heading))
         return result
     }
+    
+    var birthYear: NSAttributedString {
+        PresenterAttr.attributed(label: "Birth Year", value: model.birthYear)
+    }
+    
+    var eyeColor: NSAttributedString {
+        PresenterAttr.attributed(label: "Eye Color", value: model.eyeColor)
+    }
+    
+    var height: NSAttributedString {
+        PresenterAttr.attributed(label: "Height", value: model.height)
+    }
+    
+    var mass: NSAttributedString {
+        PresenterAttr.attributed(label: "Mass", value: model.mass)
+    }
 
+    var skinColor: NSAttributedString {
+        PresenterAttr.attributed(label: "Skin Color", value: model.skinColor)
+    }
+
+    var created: NSAttributedString {
+        PresenterAttr.attributed(label: "Created", value: PresenterAttr.dateFormatter.string(from: model.created))
+    }
+    
+    var edited: NSAttributedString {
+        PresenterAttr.attributed(label: "Edited", value: PresenterAttr.dateFormatter.string(from: model.edited))
+    }
+    
+    var films: NSAttributedString {
+        PresenterAttr.attributed(label: "Films")
+    }
+    
+    var link: NSAttributedString {
+        PresenterAttr.attributed(label: "Link", value: model.url.path)
+    }
 }
 

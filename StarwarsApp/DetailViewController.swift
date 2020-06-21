@@ -12,11 +12,11 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var detailDescriptionLabel: UILabel!
 
     func configureView() {
-        if let detail = detailItem as? AttributedConvertable {
-            if let label = detailDescriptionLabel {
-                label.attributedText = detail.attributed
-            }
-        }
+//        if let detail = detailItem as? AttributedConvertable {
+//            if let label = detailDescriptionLabel {
+//                label.attributedText = detail.attributed
+//            }
+//        }
     }
 
     override func viewDidLoad() {

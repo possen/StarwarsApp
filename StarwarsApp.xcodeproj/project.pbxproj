@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D531AA4A249BF2A200648152 /* DetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D531AA49249BF2A100648152 /* DetailTableViewController.swift */; };
 		D56CFFEF24898EE400C101B0 /* Mocks in Resources */ = {isa = PBXBuildFile; fileRef = D56CFFEE24898EE400C101B0 /* Mocks */; };
 		D580D53C24873CDB001B9AFD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D580D53B24873CDB001B9AFD /* AppDelegate.swift */; };
 		D580D53E24873CDB001B9AFD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D580D53D24873CDB001B9AFD /* SceneDelegate.swift */; };
@@ -18,19 +19,24 @@
 		D580D55524873CDC001B9AFD /* StarwarsAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D580D55424873CDC001B9AFD /* StarwarsAppTests.swift */; };
 		D580D56024873CDC001B9AFD /* StarwarsAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D580D55F24873CDC001B9AFD /* StarwarsAppUITests.swift */; };
 		D580D56E24874A9A001B9AFD /* MasterDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D580D56D24874A9A001B9AFD /* MasterDataSource.swift */; };
+		D5AB4231249C620E00F876C9 /* DetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5AB4230249C620E00F876C9 /* DetailTableViewCell.swift */; };
+		D5AB4233249C77C500F876C9 /* PersonPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5AB4232249C77C500F876C9 /* PersonPresenter.swift */; };
+		D5AB4240249C830300F876C9 /* StarshipPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5AB423D249C830300F876C9 /* StarshipPresenter.swift */; };
+		D5AB4241249C830300F876C9 /* VehiclePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5AB423F249C830300F876C9 /* VehiclePresenter.swift */; };
+		D5AB4242249C830300F876C9 /* PlanetPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5AB423C249C830300F876C9 /* PlanetPresenter.swift */; };
+		D5AB4243249C830300F876C9 /* FilmPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5AB423E249C830300F876C9 /* FilmPresenter.swift */; };
+		D5AB4245249C8B8900F876C9 /* PresenterAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5AB4244249C8B8900F876C9 /* PresenterAttributes.swift */; };
 		D5D3599424877D79005BCA47 /* TODO.md in Resources */ = {isa = PBXBuildFile; fileRef = D5D3599324877D79005BCA47 /* TODO.md */; };
 		D5D3599624878D2D005BCA47 /* People.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D3599524878D2D005BCA47 /* People.swift */; };
 		D5D35998248895D3005BCA47 /* Planets.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D35997248895D3005BCA47 /* Planets.swift */; };
 		D5D3599A2488BDB6005BCA47 /* Films.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D359992488BDB6005BCA47 /* Films.swift */; };
 		D5D3599C2488BEE3005BCA47 /* Starships.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D3599B2488BEE3005BCA47 /* Starships.swift */; };
 		D5D3599E2488BFE1005BCA47 /* Vehicles.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D3599D2488BFE1005BCA47 /* Vehicles.swift */; };
-		D5D359A02488E56A005BCA47 /* AttributeConvertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D3599F2488E56A005BCA47 /* AttributeConvertable.swift */; };
 		D5D359A22488F708005BCA47 /* ReadMe.md in Resources */ = {isa = PBXBuildFile; fileRef = D5D359A12488F708005BCA47 /* ReadMe.md */; };
-		D5D359A424896C0E005BCA47 /* PersonPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D359A324896C0E005BCA47 /* PersonPresenter.swift */; };
-		D5D359A624896CF7005BCA47 /* FilmPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D359A524896CF7005BCA47 /* FilmPresenter.swift */; };
-		D5D359A824896DC3005BCA47 /* StarshipPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D359A724896DC3005BCA47 /* StarshipPresenter.swift */; };
-		D5D359AA24896E9C005BCA47 /* PlanetPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D359A924896E9C005BCA47 /* PlanetPresenter.swift */; };
-		D5D359AC24896FB1005BCA47 /* VehiclePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D359AB24896FB1005BCA47 /* VehiclePresenter.swift */; };
+		D5D537DC249ED12F003503E8 /* PagedContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D537DB249ED12F003503E8 /* PagedContainer.swift */; };
+		D5D537DE249ED165003503E8 /* TableViewAdaptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D537DD249ED165003503E8 /* TableViewAdaptor.swift */; };
+		D5D537E0249ED25A003503E8 /* PresenterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D537DF249ED25A003503E8 /* PresenterTableViewController.swift */; };
+		D5D537E2249EF26E003503E8 /* MasterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D537E1249EF26E003503E8 /* MasterTableViewCell.swift */; };
 		D5E6E78D248772D3005AD175 /* ResonanceKit in Frameworks */ = {isa = PBXBuildFile; productRef = D5E6E78C248772D3005AD175 /* ResonanceKit */; };
 		D5E6E78F248776CD005AD175 /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E6E78E248776CD005AD175 /* NetworkController.swift */; };
 /* End PBXBuildFile section */
@@ -54,6 +60,7 @@
 
 /* Begin PBXFileReference section */
 		D52A777B249822C0001ACC43 /* StarwarsApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = StarwarsApp.entitlements; sourceTree = "<group>"; };
+		D531AA49249BF2A100648152 /* DetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTableViewController.swift; sourceTree = "<group>"; };
 		D56CFFEE24898EE400C101B0 /* Mocks */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Mocks; sourceTree = "<group>"; };
 		D56CFFF02489AF3500C101B0 /* ResonanceKit */ = {isa = PBXFileReference; lastKnownFileType = folder; name = ResonanceKit; path = ../ResonanceKit; sourceTree = "<group>"; };
 		D580D53824873CDB001B9AFD /* StarwarsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StarwarsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -72,19 +79,24 @@
 		D580D55F24873CDC001B9AFD /* StarwarsAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarwarsAppUITests.swift; sourceTree = "<group>"; };
 		D580D56124873CDC001B9AFD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D580D56D24874A9A001B9AFD /* MasterDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterDataSource.swift; sourceTree = "<group>"; };
+		D5AB4230249C620E00F876C9 /* DetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTableViewCell.swift; sourceTree = "<group>"; };
+		D5AB4232249C77C500F876C9 /* PersonPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonPresenter.swift; sourceTree = "<group>"; };
+		D5AB423C249C830300F876C9 /* PlanetPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetPresenter.swift; sourceTree = "<group>"; };
+		D5AB423D249C830300F876C9 /* StarshipPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarshipPresenter.swift; sourceTree = "<group>"; };
+		D5AB423E249C830300F876C9 /* FilmPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmPresenter.swift; sourceTree = "<group>"; };
+		D5AB423F249C830300F876C9 /* VehiclePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehiclePresenter.swift; sourceTree = "<group>"; };
+		D5AB4244249C8B8900F876C9 /* PresenterAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresenterAttributes.swift; sourceTree = "<group>"; };
 		D5D3599324877D79005BCA47 /* TODO.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = TODO.md; sourceTree = "<group>"; };
 		D5D3599524878D2D005BCA47 /* People.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = People.swift; sourceTree = "<group>"; };
 		D5D35997248895D3005BCA47 /* Planets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Planets.swift; sourceTree = "<group>"; };
 		D5D359992488BDB6005BCA47 /* Films.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Films.swift; sourceTree = "<group>"; };
 		D5D3599B2488BEE3005BCA47 /* Starships.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Starships.swift; sourceTree = "<group>"; };
 		D5D3599D2488BFE1005BCA47 /* Vehicles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vehicles.swift; sourceTree = "<group>"; };
-		D5D3599F2488E56A005BCA47 /* AttributeConvertable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributeConvertable.swift; sourceTree = "<group>"; };
 		D5D359A12488F708005BCA47 /* ReadMe.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = ReadMe.md; sourceTree = "<group>"; };
-		D5D359A324896C0E005BCA47 /* PersonPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonPresenter.swift; sourceTree = "<group>"; };
-		D5D359A524896CF7005BCA47 /* FilmPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmPresenter.swift; sourceTree = "<group>"; };
-		D5D359A724896DC3005BCA47 /* StarshipPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarshipPresenter.swift; sourceTree = "<group>"; };
-		D5D359A924896E9C005BCA47 /* PlanetPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetPresenter.swift; sourceTree = "<group>"; };
-		D5D359AB24896FB1005BCA47 /* VehiclePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehiclePresenter.swift; sourceTree = "<group>"; };
+		D5D537DB249ED12F003503E8 /* PagedContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagedContainer.swift; sourceTree = "<group>"; };
+		D5D537DD249ED165003503E8 /* TableViewAdaptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewAdaptor.swift; sourceTree = "<group>"; };
+		D5D537DF249ED25A003503E8 /* PresenterTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresenterTableViewController.swift; sourceTree = "<group>"; };
+		D5D537E1249EF26E003503E8 /* MasterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterTableViewCell.swift; sourceTree = "<group>"; };
 		D5E6E78E248776CD005AD175 /* NetworkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -144,20 +156,26 @@
 				D580D53B24873CDB001B9AFD /* AppDelegate.swift */,
 				D580D53D24873CDB001B9AFD /* SceneDelegate.swift */,
 				D580D53F24873CDB001B9AFD /* MasterViewController.swift */,
+				D5D537E1249EF26E003503E8 /* MasterTableViewCell.swift */,
 				D580D56D24874A9A001B9AFD /* MasterDataSource.swift */,
 				D5E6E78E248776CD005AD175 /* NetworkController.swift */,
 				D580D54124873CDB001B9AFD /* DetailViewController.swift */,
-				D5D3599F2488E56A005BCA47 /* AttributeConvertable.swift */,
+				D5AB4244249C8B8900F876C9 /* PresenterAttributes.swift */,
+				D5AB4232249C77C500F876C9 /* PersonPresenter.swift */,
+				D5AB423E249C830300F876C9 /* FilmPresenter.swift */,
+				D5AB423C249C830300F876C9 /* PlanetPresenter.swift */,
+				D5AB423D249C830300F876C9 /* StarshipPresenter.swift */,
+				D5AB423F249C830300F876C9 /* VehiclePresenter.swift */,
+				D5D537DF249ED25A003503E8 /* PresenterTableViewController.swift */,
+				D5D537DB249ED12F003503E8 /* PagedContainer.swift */,
 				D5D3599524878D2D005BCA47 /* People.swift */,
 				D5D359992488BDB6005BCA47 /* Films.swift */,
 				D5D3599B2488BEE3005BCA47 /* Starships.swift */,
 				D5D35997248895D3005BCA47 /* Planets.swift */,
 				D5D3599D2488BFE1005BCA47 /* Vehicles.swift */,
-				D5D359A324896C0E005BCA47 /* PersonPresenter.swift */,
-				D5D359A524896CF7005BCA47 /* FilmPresenter.swift */,
-				D5D359A724896DC3005BCA47 /* StarshipPresenter.swift */,
-				D5D359A924896E9C005BCA47 /* PlanetPresenter.swift */,
-				D5D359AB24896FB1005BCA47 /* VehiclePresenter.swift */,
+				D5AB4230249C620E00F876C9 /* DetailTableViewCell.swift */,
+				D531AA49249BF2A100648152 /* DetailTableViewController.swift */,
+				D5D537DD249ED165003503E8 /* TableViewAdaptor.swift */,
 				D580D54324873CDB001B9AFD /* Main.storyboard */,
 				D580D54624873CDC001B9AFD /* Assets.xcassets */,
 				D580D54824873CDC001B9AFD /* LaunchScreen.storyboard */,
@@ -325,20 +343,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D5D359AC24896FB1005BCA47 /* VehiclePresenter.swift in Sources */,
+				D5AB4231249C620E00F876C9 /* DetailTableViewCell.swift in Sources */,
+				D5AB4245249C8B8900F876C9 /* PresenterAttributes.swift in Sources */,
 				D580D56E24874A9A001B9AFD /* MasterDataSource.swift in Sources */,
+				D5D537DE249ED165003503E8 /* TableViewAdaptor.swift in Sources */,
 				D580D53C24873CDB001B9AFD /* AppDelegate.swift in Sources */,
-				D5D359A02488E56A005BCA47 /* AttributeConvertable.swift in Sources */,
+				D5AB4242249C830300F876C9 /* PlanetPresenter.swift in Sources */,
+				D5D537DC249ED12F003503E8 /* PagedContainer.swift in Sources */,
 				D5E6E78F248776CD005AD175 /* NetworkController.swift in Sources */,
-				D5D359A624896CF7005BCA47 /* FilmPresenter.swift in Sources */,
-				D5D359A424896C0E005BCA47 /* PersonPresenter.swift in Sources */,
+				D531AA4A249BF2A200648152 /* DetailTableViewController.swift in Sources */,
 				D580D53E24873CDB001B9AFD /* SceneDelegate.swift in Sources */,
-				D5D359A824896DC3005BCA47 /* StarshipPresenter.swift in Sources */,
 				D580D54024873CDB001B9AFD /* MasterViewController.swift in Sources */,
+				D5AB4243249C830300F876C9 /* FilmPresenter.swift in Sources */,
+				D5AB4240249C830300F876C9 /* StarshipPresenter.swift in Sources */,
 				D580D54224873CDB001B9AFD /* DetailViewController.swift in Sources */,
+				D5D537E0249ED25A003503E8 /* PresenterTableViewController.swift in Sources */,
+				D5AB4241249C830300F876C9 /* VehiclePresenter.swift in Sources */,
+				D5AB4233249C77C500F876C9 /* PersonPresenter.swift in Sources */,
+				D5D537E2249EF26E003503E8 /* MasterTableViewCell.swift in Sources */,
 				D5D3599624878D2D005BCA47 /* People.swift in Sources */,
 				D5D3599C2488BEE3005BCA47 /* Starships.swift in Sources */,
-				D5D359AA24896E9C005BCA47 /* PlanetPresenter.swift in Sources */,
 				D5D3599A2488BDB6005BCA47 /* Films.swift in Sources */,
 				D5D3599E2488BFE1005BCA47 /* Vehicles.swift in Sources */,
 				D5D35998248895D3005BCA47 /* Planets.swift in Sources */,
