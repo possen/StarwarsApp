@@ -5,11 +5,11 @@
 - A few force unwraps, although in all places, I would want the app to fail if nil for quick identification
 - Paging on demand rather than preloading everything but since data set is small and time is limited, decided to load all
 - Only tested on large phones and ipad, there may be layout issues on smaller devices.
+- Works best on ipad or mac catalyst
 - General UI cleanup
 - Add a activity spinner for longer loads.
 - More test coverage.
 - An interlock to prevent more than one search queued up from fast cliicking in UI.
-- Search delay so that it does not query really fast when typing (debounce). 
 - Did not do species, ran out of space in search bar
 - more error handling and checking for errors.
 

@@ -18,6 +18,10 @@
 - was careful about dependencies so the imports reflect what is actually needed. 
 - Followed Single Responsiblity principle, this can be seen in Presenter objects separation from model objects.
 - I did not try to handle links to other types although it would be pretty easy to add links on the attributed text. I added link in one place but it does not go anywhere.
+- Major changes to use DiffableDataSources providing nice animations when querying and switching tabs.
+- Now caches the requests to avoid hitting server limites.
+- Queries are peformed locally
+- Can navigate into film links, not working
 
 ## Testing
 - Command-U should run the tests I created. 
