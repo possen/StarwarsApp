@@ -14,12 +14,17 @@ struct Vehicles: Decodable {
     var results: [Vehicle]
 }
 
-struct Vehicle: Decodable, CustomStringConvertible {
+struct Vehicle: Decodable, CustomStringConvertible, Hashable {
 
     var description: String {
         return name
     }
     
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(self.identifier)
+    }
+    private let identifier = UUID()
+
     let name: String
     let model: String
     let vehicleClass: String

@@ -14,11 +14,16 @@ struct Planets: Decodable {
     var results: [Planet]
 }
 
-struct Planet: Decodable, CustomStringConvertible {
+struct Planet: Decodable, CustomStringConvertible, Hashable {
 
     var description: String {
         return name
     }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(self.identifier)
+    }
+    private let identifier = UUID()
 
     let name: String
     let rotationPeriod: String

@@ -14,10 +14,15 @@ struct Films: Decodable {
     var results: [Film]
 }
 
-struct Film: Decodable, CustomStringConvertible {
+struct Film: Decodable, CustomStringConvertible, Hashable {
     var description: String {
         return title
     }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(self.identifier)
+    }
+    private let identifier = UUID()
     
     let title: String
     let episodeId: Int

@@ -12,7 +12,6 @@
 		D580D53C24873CDB001B9AFD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D580D53B24873CDB001B9AFD /* AppDelegate.swift */; };
 		D580D53E24873CDB001B9AFD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D580D53D24873CDB001B9AFD /* SceneDelegate.swift */; };
 		D580D54024873CDB001B9AFD /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D580D53F24873CDB001B9AFD /* MasterViewController.swift */; };
-		D580D54224873CDB001B9AFD /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D580D54124873CDB001B9AFD /* DetailViewController.swift */; };
 		D580D54524873CDB001B9AFD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D580D54324873CDB001B9AFD /* Main.storyboard */; };
 		D580D54724873CDC001B9AFD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D580D54624873CDC001B9AFD /* Assets.xcassets */; };
 		D580D54A24873CDC001B9AFD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D580D54824873CDC001B9AFD /* LaunchScreen.storyboard */; };
@@ -33,9 +32,6 @@
 		D5D3599C2488BEE3005BCA47 /* Starships.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D3599B2488BEE3005BCA47 /* Starships.swift */; };
 		D5D3599E2488BFE1005BCA47 /* Vehicles.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D3599D2488BFE1005BCA47 /* Vehicles.swift */; };
 		D5D359A22488F708005BCA47 /* ReadMe.md in Resources */ = {isa = PBXBuildFile; fileRef = D5D359A12488F708005BCA47 /* ReadMe.md */; };
-		D5D537DC249ED12F003503E8 /* PagedContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D537DB249ED12F003503E8 /* PagedContainer.swift */; };
-		D5D537DE249ED165003503E8 /* TableViewAdaptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D537DD249ED165003503E8 /* TableViewAdaptor.swift */; };
-		D5D537E0249ED25A003503E8 /* PresenterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D537DF249ED25A003503E8 /* PresenterTableViewController.swift */; };
 		D5D537E2249EF26E003503E8 /* MasterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D537E1249EF26E003503E8 /* MasterTableViewCell.swift */; };
 		D5E6E78D248772D3005AD175 /* ResonanceKit in Frameworks */ = {isa = PBXBuildFile; productRef = D5E6E78C248772D3005AD175 /* ResonanceKit */; };
 		D5E6E78F248776CD005AD175 /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E6E78E248776CD005AD175 /* NetworkController.swift */; };
@@ -67,7 +63,6 @@
 		D580D53B24873CDB001B9AFD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D580D53D24873CDB001B9AFD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		D580D53F24873CDB001B9AFD /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
-		D580D54124873CDB001B9AFD /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		D580D54424873CDB001B9AFD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D580D54624873CDC001B9AFD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D580D54924873CDC001B9AFD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -93,9 +88,6 @@
 		D5D3599B2488BEE3005BCA47 /* Starships.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Starships.swift; sourceTree = "<group>"; };
 		D5D3599D2488BFE1005BCA47 /* Vehicles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vehicles.swift; sourceTree = "<group>"; };
 		D5D359A12488F708005BCA47 /* ReadMe.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = ReadMe.md; sourceTree = "<group>"; };
-		D5D537DB249ED12F003503E8 /* PagedContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagedContainer.swift; sourceTree = "<group>"; };
-		D5D537DD249ED165003503E8 /* TableViewAdaptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewAdaptor.swift; sourceTree = "<group>"; };
-		D5D537DF249ED25A003503E8 /* PresenterTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresenterTableViewController.swift; sourceTree = "<group>"; };
 		D5D537E1249EF26E003503E8 /* MasterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterTableViewCell.swift; sourceTree = "<group>"; };
 		D5E6E78E248776CD005AD175 /* NetworkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -159,15 +151,12 @@
 				D5D537E1249EF26E003503E8 /* MasterTableViewCell.swift */,
 				D580D56D24874A9A001B9AFD /* MasterDataSource.swift */,
 				D5E6E78E248776CD005AD175 /* NetworkController.swift */,
-				D580D54124873CDB001B9AFD /* DetailViewController.swift */,
 				D5AB4244249C8B8900F876C9 /* PresenterAttributes.swift */,
 				D5AB4232249C77C500F876C9 /* PersonPresenter.swift */,
 				D5AB423E249C830300F876C9 /* FilmPresenter.swift */,
 				D5AB423C249C830300F876C9 /* PlanetPresenter.swift */,
 				D5AB423D249C830300F876C9 /* StarshipPresenter.swift */,
 				D5AB423F249C830300F876C9 /* VehiclePresenter.swift */,
-				D5D537DF249ED25A003503E8 /* PresenterTableViewController.swift */,
-				D5D537DB249ED12F003503E8 /* PagedContainer.swift */,
 				D5D3599524878D2D005BCA47 /* People.swift */,
 				D5D359992488BDB6005BCA47 /* Films.swift */,
 				D5D3599B2488BEE3005BCA47 /* Starships.swift */,
@@ -175,7 +164,6 @@
 				D5D3599D2488BFE1005BCA47 /* Vehicles.swift */,
 				D5AB4230249C620E00F876C9 /* DetailTableViewCell.swift */,
 				D531AA49249BF2A100648152 /* DetailTableViewController.swift */,
-				D5D537DD249ED165003503E8 /* TableViewAdaptor.swift */,
 				D580D54324873CDB001B9AFD /* Main.storyboard */,
 				D580D54624873CDC001B9AFD /* Assets.xcassets */,
 				D580D54824873CDC001B9AFD /* LaunchScreen.storyboard */,
@@ -346,18 +334,14 @@
 				D5AB4231249C620E00F876C9 /* DetailTableViewCell.swift in Sources */,
 				D5AB4245249C8B8900F876C9 /* PresenterAttributes.swift in Sources */,
 				D580D56E24874A9A001B9AFD /* MasterDataSource.swift in Sources */,
-				D5D537DE249ED165003503E8 /* TableViewAdaptor.swift in Sources */,
 				D580D53C24873CDB001B9AFD /* AppDelegate.swift in Sources */,
 				D5AB4242249C830300F876C9 /* PlanetPresenter.swift in Sources */,
-				D5D537DC249ED12F003503E8 /* PagedContainer.swift in Sources */,
 				D5E6E78F248776CD005AD175 /* NetworkController.swift in Sources */,
 				D531AA4A249BF2A200648152 /* DetailTableViewController.swift in Sources */,
 				D580D53E24873CDB001B9AFD /* SceneDelegate.swift in Sources */,
 				D580D54024873CDB001B9AFD /* MasterViewController.swift in Sources */,
 				D5AB4243249C830300F876C9 /* FilmPresenter.swift in Sources */,
 				D5AB4240249C830300F876C9 /* StarshipPresenter.swift in Sources */,
-				D580D54224873CDB001B9AFD /* DetailViewController.swift in Sources */,
-				D5D537E0249ED25A003503E8 /* PresenterTableViewController.swift in Sources */,
 				D5AB4241249C830300F876C9 /* VehiclePresenter.swift in Sources */,
 				D5AB4233249C77C500F876C9 /* PersonPresenter.swift in Sources */,
 				D5D537E2249EF26E003503E8 /* MasterTableViewCell.swift in Sources */,

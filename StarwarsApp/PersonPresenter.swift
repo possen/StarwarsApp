@@ -29,12 +29,13 @@ struct PersonPresenter: CustomStringConvertible, CustomReflectable, Presentable 
     var description: String {
         model.description
     }
+
     var count: Int {
-        customMirror.customMirror.children.count
+        customMirror.children.count
     }
     
     subscript(index: Int) -> Any {
-        let children = customMirror.customMirror.children
+        let children = customMirror.children
         return children[children.index(children.startIndex, offsetBy: index)].value
     }
     

@@ -14,11 +14,16 @@ struct Starships: Decodable {
     var results: [Starship]
 }
 
-struct Starship: Decodable, CustomStringConvertible {
+struct Starship: Decodable, CustomStringConvertible, Hashable {
     var description: String {
         return name
     }
     
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(self.identifier)
+    }
+    private let identifier = UUID()
+
     let name: String
     let model: String
     let manufacturer: String

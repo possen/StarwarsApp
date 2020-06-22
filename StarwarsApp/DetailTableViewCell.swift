@@ -9,7 +9,7 @@
 import UIKit
 
 class DetailTableViewCell: UITableViewCell {
-    var item: PresentItem?
+    var item: Presentable?
     @IBOutlet weak var activity: UIActivityIndicatorView!
 
     override func awakeFromNib() {

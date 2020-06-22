@@ -14,12 +14,17 @@ struct People: Decodable {
     var results: [Person]
 }
 
-struct Person: Decodable, CustomStringConvertible {
+struct Person: Decodable, CustomStringConvertible, Hashable {
     
     var description: String {
         return name
     }
     
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(self.identifier)
+    }
+ 
+    private let identifier = UUID()
     let name: String
     let birthYear: String
     let eyeColor: String

@@ -10,23 +10,29 @@ import UIKit
 import SwiftCoroutine
 
 class MasterViewController: UITableViewController {
+    static let reuseID = "MasterCell"
     @IBOutlet weak var searchBar: UISearchBar!
+    var networkController = NetworkController()
     var detailViewController: DetailTableViewController? = nil
-    let searches = [
-        "people/",
-        "planets/",
-        "films/",
-        "vehicles/",
-        "starships/"
-    ]
-    var currentQuery = ""
-    var masterDataSource: MasterDataSource?
+    var dataSource: UITableViewDiffableDataSource<Section, QueryItem>! = nil
+    var currentSnapshot: NSDiffableDataSourceSnapshot<Section, QueryItem>! = nil
+    var selectedScope: Int = 0
+    var items: [QueryItem] = []
+    
+    enum Section {
+        case main
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        currentQuery = searches[0]
         searchBar.delegate = self
-        masterDataSource = MasterDataSource(tableView: tableView, query: currentQuery)
+        currentSnapshot = NSDiffableDataSourceSnapshot<Section, QueryItem>()
+        dataSource = UITableViewDiffableDataSource<Section, QueryItem>(tableView: tableView) { tableView, indexPath, item in
+            let cell = tableView.dequeueReusableCell(withIdentifier: Self.reuseID, for: indexPath)
+            cell.textLabel?.text = item.description
+            return cell
+        }
+        currentSnapshot.appendSections([.main])
         if let split = splitViewController {
             let controllers = split.viewControllers
             let nav = controllers[controllers.count-1] as! UINavigationController
@@ -37,6 +43,7 @@ class MasterViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         clearsSelectionOnViewWillAppear = splitViewController!.isCollapsed
         super.viewWillAppear(animated)
+        search(filter: "", page: 1)
     }
     
     // MARK: - Segues
@@ -44,32 +51,73 @@ class MasterViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showDetail" {
             if let indexPath = tableView.indexPathForSelectedRow {
-//                let object = masterDataSource.object(tableView: tableView, at: indexPath)
+                let object = items[indexPath.row]
                 let nav = segue.destination as! UINavigationController
                 let controller = nav.topViewController as! DetailTableViewController
-//                controller.item = object
+                switch object {
+                case .person(let model):
+                    controller.item = PersonPresenter(model: model)
+                case .film(let model):
+                    controller.item = FilmPresenter(model: model)
+                case .starship(let model):
+                    controller.item = StarshipPresenter(model: model)
+                case .planet(let model):
+                    controller.item = PlanetPresenter(model: model)
+                case .vehicle(let model):
+                    controller.item = VehiclePresenter(model: model)
+                }
                 controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
                 controller.navigationItem.leftItemsSupplementBackButton = true
                 detailViewController = controller
             }
         }
     }
+    
+    func search(filter: String, page: Int) {
+        
+        func doSearch() {
+            do {
+                let result = try networkController.search(selectedScope: selectedScope, filter: filter, page: page)
+                let (_, items) = result
+                let filtered = items.filter {
+                    guard filter != "" else { return true }
+                    return $0.description.lowercased().contains(filter.lowercased())
+                }
+                var currentSnapshot = NSDiffableDataSourceSnapshot<Section, QueryItem>()
+                currentSnapshot.appendSections([.main])
+                currentSnapshot.appendItems(filtered, toSection: .main)
+                self.items = filtered
+                dataSource.apply(currentSnapshot, animatingDifferences: true)
+            } catch {
+            }
+        }
+
+        DispatchQueue.main.startCoroutine {
+            return doSearch()
+        }
+    }
+    
+    func reset() {
+        currentSnapshot.deleteSections([.main])
+        items = []
+        dataSource.apply(currentSnapshot, animatingDifferences: true)
+    }
 }
 
 extension MasterViewController: UISearchBarDelegate {
-    
+
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        masterDataSource?.search( query: currentQuery, filter: searchText)
+        search(filter: searchBar.text ?? "", page: 1)
     }
 
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        masterDataSource?.search(query: currentQuery, filter: searchBar.text ?? "")
+        search(filter: searchBar.text ?? "", page: 1)
     }
-    
+
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
-        let path = searches[selectedScope]
-        currentQuery = path
-        masterDataSource?.search(query: path, filter: "")
+        self.selectedScope = selectedScope
+        reset()
+        search(filter: "", page: 1)
     }
 }
 

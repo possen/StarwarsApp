@@ -56,10 +56,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, UISplitViewControllerDe
         guard let secondaryAsNavController = secondaryViewController as? UINavigationController else {
             return false
         }
-        guard let topAsDetailController = secondaryAsNavController.topViewController as? DetailViewController else {
+        guard let topAsDetailController = secondaryAsNavController.topViewController as? DetailTableViewController else {
             return false
         }
-        if topAsDetailController.detailItem == nil {
+        if topAsDetailController.item == nil {
             // Return true to indicate that we have handled the collapse by doing nothing; the secondary controller will be discarded.
             return true
         }

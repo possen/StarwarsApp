@@ -16,13 +16,45 @@ struct ErrorResponse: Decodable, CustomStringConvertible {
     }
 }
 
+enum QueryType: String {
+    case people
+    case planets
+    case vehicles
+    case starships
+    case films
+}
+
+enum QueryItem: Hashable, CustomStringConvertible {
+    case person(Person)
+    case planet(Planet)
+    case vehicle(Vehicle)
+    case starship(Starship)
+    case film(Film)
+    
+    var description: String {
+        switch self {
+        case .person(let item):
+            return item.name
+        case .planet(let item):
+            return item.name
+        case .vehicle(let item):
+            return item.name
+        case .starship(let item):
+            return item.name
+        case .film(let item):
+            return item.title
+        }
+    }
+}
+
 struct NetworkController {
     let session: JSONSession
+    var cached = [[QueryItem]](repeating: [], count: 5)
     
     public enum Failures: Error {
         case badDateFormat
     }
-
+    
     public static var dateFormatter: ISO8601DateFormatter {
         let formatter = ISO8601DateFormatter()
         formatter.formatOptions = [
@@ -43,8 +75,7 @@ struct NetworkController {
         }
         return val
     }
-
-
+    
     init() {
         guard let url = URL(string: "https://swapi.dev/api/") else {
             fatalError("unable to create URL")
@@ -54,56 +85,127 @@ struct NetworkController {
         session.dateDecodingStrategy = .custom(Self.specialDateDecoder)
     }
     
-    struct GenericResult {
-        let totalCount: Int
-        let results: [Any]
+    func search<T: Decodable>(queryType: T.Type, filter: String, page: Int) throws -> T {
+        let request = JSONRequest<T, ErrorResponse>(
+            method: .get,
+            path: "\(String(describing: String(describing: queryType).lowercased()))/",
+            session: session
+        )
+        return try request.perform(parameters: ["search": filter, "page": String(page)]).await()
     }
     
-    func search(query: String, filter: String, page: Int) throws -> GenericResult {
-                
-        func fetchPeople(filter: String, page: Int) throws -> People {
-            let request = JSONRequest<People, ErrorResponse>(method: .get, path: query, session: self.session)
-            return try request.perform(parameters: ["search": filter, "page": String(page)]).await()
-        }
-        
-        func fetchPlanets(filter: String, page: Int) throws -> Planets {
-            let request = JSONRequest<Planets, ErrorResponse>(method: .get, path: query, session: self.session)
-            return try request.perform(parameters: ["search": filter, "page": String(page)]).await()
-        }
-        
-        func fetchFilms(filter: String, page: Int) throws -> Films {
-            let request = JSONRequest<Films, ErrorResponse>(method: .get, path: query, session: self.session)
-            return try request.perform(parameters: ["search": filter, "page": String(page)]).await()
-        }
-        
-        func fetchVehicles(filter: String, page: Int) throws -> Vehicles {
-            let request = JSONRequest<Vehicles, ErrorResponse>(method: .get, path: query, session: self.session)
-            return try request.perform(parameters: ["search": filter, "page": String(page)]).await()
-        }
-        
-        func fetchStarships(filter: String, page: Int) throws -> Starships {
-            let request = JSONRequest<Starships, ErrorResponse>(method: .get, path: query, session: self.session)
-            return try request.perform(parameters: ["search": filter, "page": String(page)]).await()
-        }
-
-        switch query {
-        case "people/":
-            let people = try fetchPeople(filter: filter, page: page)
-            return GenericResult(totalCount: people.count, results: people.results)
-        case "planets/":
-            let planets = try fetchPlanets(filter: filter, page: page)
-            return GenericResult(totalCount: planets.count, results: planets.results)
-        case "films/":
-            let films = try fetchFilms(filter: filter, page: page)
-            return GenericResult(totalCount: films.count, results: films.results)
-        case "vehicles/":
-            let vehicles = try fetchVehicles(filter: filter, page: page)
-            return GenericResult(totalCount: vehicles.count, results: vehicles.results)
-        case "starships/":
-            let starships = try fetchStarships(filter: filter, page: page)
-            return GenericResult(totalCount: starships.count, results: starships.results)
-        default:
-            fatalError("unsupported data type")
+    mutating func search(selectedScope: Int, filter: String, page: Int) throws -> (Int, [QueryItem]) {
+        switch selectedScope {
+        case 0:
+            guard cached[selectedScope].isEmpty else {
+                return (cached[selectedScope].count, cached[selectedScope])
+            }
+            var result = try search(queryType: People.self, filter: filter, page: page)
+            var nextResult = result
+            var page = 1
+            while result.results.count < result.count {
+                nextResult = try search(queryType: People.self, filter: filter, page: page)
+                result.results += nextResult.results
+                page += 1
+            }
+            var prev = ""
+            result.results = result.results.sorted { $0.name < $1.name }.filter {
+                let result = prev != $0.name
+                prev = $0.name
+                return result
+            }
+            let final = result.results.map { QueryItem.person($0) }
+            cached[selectedScope] = final
+            return (result.count, final)
+        case 1:
+            guard cached[selectedScope].isEmpty else {
+                return (cached[selectedScope].count, cached[selectedScope])
+            }
+            var result = try search(queryType: Planets.self, filter: filter, page: page)
+            var nextResult = result
+            var page = 1
+            while result.results.count < result.count {
+                nextResult = try search(queryType: Planets.self, filter: filter, page: page)
+                result.results += nextResult.results
+                page += 1
+            }
+            var prev = ""
+            result.results = result.results.sorted { $0.name < $1.name }.filter {
+                let result = prev != $0.name
+                prev = $0.name
+                return result
+            }
+            result.results.sort { $0.name < $1.name }
+            let final = result.results.map { QueryItem.planet($0) }
+            cached[selectedScope] = final
+            return (result.count, final)
+        case 2:
+            guard cached[selectedScope].isEmpty else {
+                return (cached[selectedScope].count, cached[selectedScope])
+            }
+            var result = try search(queryType: Films.self, filter: filter, page: page)
+            var nextResult = result
+            var page = 1
+            while result.results.count < result.count {
+                nextResult = try search(queryType: Films.self, filter: filter, page: page)
+                result.results += nextResult.results
+                page += 1
+            }
+            var prev = ""
+            result.results = result.results.sorted { $0.title < $1.title }.filter {
+                let result = prev != $0.title
+                prev = $0.title
+                return result
+            }
+            result.results.sort { $0.title < $1.title }
+            let final = result.results.map { QueryItem.film($0) }
+            cached[selectedScope] = final
+            return (result.count, final)
+        case 3:
+            guard cached[selectedScope].isEmpty else {
+                return (cached[selectedScope].count, cached[selectedScope])
+            }
+            var result = try search(queryType: Vehicles.self, filter: filter, page: page)
+            var nextResult = result
+            var page = 1
+            while result.results.count < result.count {
+                nextResult = try search(queryType: Vehicles.self, filter: filter, page: page)
+                result.results += nextResult.results
+                page += 1
+            }
+            var prev = ""
+            result.results = result.results.sorted { $0.name < $1.name }.filter {
+                let result = prev != $0.name
+                prev = $0.name
+                return result
+            }
+            result.results.sort { $0.name < $1.name }
+            let final = result.results.map { QueryItem.vehicle($0) }
+            cached[selectedScope] = final
+            return (result.count, final)
+        case 4:
+            guard cached[selectedScope].isEmpty else {
+                return (cached[selectedScope].count, cached[selectedScope])
+            }
+            var result = try search(queryType: Starships.self, filter: filter, page: page)
+            var nextResult = result
+            var page = 1
+            while result.results.count < result.count {
+                nextResult = try search(queryType: Starships.self, filter: filter, page: page)
+                result.results += nextResult.results
+                page += 1
+            }
+            var prev = ""
+            result.results = result.results.sorted { $0.name < $1.name }.filter {
+                let result = prev != $0.name
+                prev = $0.name
+                return result
+            }
+            result.results.sort { $0.name < $1.name }
+            let final = result.results.map { QueryItem.starship($0) }
+            cached[selectedScope] = final
+            return (result.count, final)
+        default: fatalError()
         }
     }
 }

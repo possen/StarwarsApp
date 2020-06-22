@@ -21,7 +21,7 @@ class DetailTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let dest = segue.destination as? DetailTableViewController,
             let cell = sender as? DetailTableViewCell {
-//            dest.item = cell.item
+            dest.item = cell.item
         }
     }
     
@@ -35,16 +35,9 @@ class DetailTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if  let value = item?[indexPath.row] {
-//            if value.children {
-//                let cell = tableView.dequeueReusableCell(withIdentifier: "ArrayCell", for: indexPath) as! DetailTableViewCell
-//                cell.textLabel?.attributedText = item as? NSAttributedString
-//                cell.item = value
-//                return cell
-//            } else {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-                cell.textLabel?.attributedText = value as? NSAttributedString
-                return cell
-//            }
+            let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+            cell.textLabel?.attributedText = value as? NSAttributedString
+            return cell
         }
         return UITableViewCell()
     }
