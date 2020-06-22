@@ -18,6 +18,8 @@
 		D580D55524873CDC001B9AFD /* StarwarsAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D580D55424873CDC001B9AFD /* StarwarsAppTests.swift */; };
 		D580D56024873CDC001B9AFD /* StarwarsAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D580D55F24873CDC001B9AFD /* StarwarsAppUITests.swift */; };
 		D580D56E24874A9A001B9AFD /* MasterDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D580D56D24874A9A001B9AFD /* MasterDataSource.swift */; };
+		D59E9D2524A0A1E100D78F75 /* ArrayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59E9D2424A0A1E100D78F75 /* ArrayTableViewCell.swift */; };
+		D59E9D2724A0A39A00D78F75 /* ArrayTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59E9D2624A0A39A00D78F75 /* ArrayTableViewController.swift */; };
 		D5AB4231249C620E00F876C9 /* DetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5AB4230249C620E00F876C9 /* DetailTableViewCell.swift */; };
 		D5AB4233249C77C500F876C9 /* PersonPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5AB4232249C77C500F876C9 /* PersonPresenter.swift */; };
 		D5AB4240249C830300F876C9 /* StarshipPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5AB423D249C830300F876C9 /* StarshipPresenter.swift */; };
@@ -74,6 +76,8 @@
 		D580D55F24873CDC001B9AFD /* StarwarsAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarwarsAppUITests.swift; sourceTree = "<group>"; };
 		D580D56124873CDC001B9AFD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D580D56D24874A9A001B9AFD /* MasterDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterDataSource.swift; sourceTree = "<group>"; };
+		D59E9D2424A0A1E100D78F75 /* ArrayTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayTableViewCell.swift; sourceTree = "<group>"; };
+		D59E9D2624A0A39A00D78F75 /* ArrayTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayTableViewController.swift; sourceTree = "<group>"; };
 		D5AB4230249C620E00F876C9 /* DetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTableViewCell.swift; sourceTree = "<group>"; };
 		D5AB4232249C77C500F876C9 /* PersonPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonPresenter.swift; sourceTree = "<group>"; };
 		D5AB423C249C830300F876C9 /* PlanetPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetPresenter.swift; sourceTree = "<group>"; };
@@ -163,7 +167,9 @@
 				D5D35997248895D3005BCA47 /* Planets.swift */,
 				D5D3599D2488BFE1005BCA47 /* Vehicles.swift */,
 				D5AB4230249C620E00F876C9 /* DetailTableViewCell.swift */,
+				D59E9D2424A0A1E100D78F75 /* ArrayTableViewCell.swift */,
 				D531AA49249BF2A100648152 /* DetailTableViewController.swift */,
+				D59E9D2624A0A39A00D78F75 /* ArrayTableViewController.swift */,
 				D580D54324873CDB001B9AFD /* Main.storyboard */,
 				D580D54624873CDC001B9AFD /* Assets.xcassets */,
 				D580D54824873CDC001B9AFD /* LaunchScreen.storyboard */,
@@ -334,6 +340,7 @@
 				D5AB4231249C620E00F876C9 /* DetailTableViewCell.swift in Sources */,
 				D5AB4245249C8B8900F876C9 /* PresenterAttributes.swift in Sources */,
 				D580D56E24874A9A001B9AFD /* MasterDataSource.swift in Sources */,
+				D59E9D2724A0A39A00D78F75 /* ArrayTableViewController.swift in Sources */,
 				D580D53C24873CDB001B9AFD /* AppDelegate.swift in Sources */,
 				D5AB4242249C830300F876C9 /* PlanetPresenter.swift in Sources */,
 				D5E6E78F248776CD005AD175 /* NetworkController.swift in Sources */,
@@ -344,6 +351,7 @@
 				D5AB4240249C830300F876C9 /* StarshipPresenter.swift in Sources */,
 				D5AB4241249C830300F876C9 /* VehiclePresenter.swift in Sources */,
 				D5AB4233249C77C500F876C9 /* PersonPresenter.swift in Sources */,
+				D59E9D2524A0A1E100D78F75 /* ArrayTableViewCell.swift in Sources */,
 				D5D537E2249EF26E003503E8 /* MasterTableViewCell.swift in Sources */,
 				D5D3599624878D2D005BCA47 /* People.swift in Sources */,
 				D5D3599C2488BEE3005BCA47 /* Starships.swift in Sources */,

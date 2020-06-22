@@ -21,7 +21,9 @@ struct VehiclePresenter: CustomStringConvertible, CustomReflectable, Presentable
             "passengers": passengers,
             "cargoCapacity": cargoCapacity,
             "createDate": createDate,
-            "editedDate": editedDate
+            "editedDate": editedDate,
+            "pilots": pilots,
+            "films": films
         ])
     }
     
@@ -74,6 +76,16 @@ struct VehiclePresenter: CustomStringConvertible, CustomReflectable, Presentable
     
     var cargoCapacity: NSAttributedString {
         PresenterAttr.attributed(label: "Cargo Capacity", value: model.cargoCapacity)
+    }
+    
+    var films: [NSAttributedString] {
+        [PresenterAttr.attributedHeader(label: "Films")]
+            + model.films.map { PresenterAttr.attributed(label: $0.description ) }
+    }
+    
+    var pilots: [NSAttributedString] {
+        [PresenterAttr.attributedHeader(label: "Pilots")]
+            + model.pilots.map { PresenterAttr.attributed(label: $0.description ) }
     }
 
     var createDate: NSAttributedString {

@@ -53,6 +53,12 @@ struct PresenterAttr {
         return result
     }
 
+    static func attributedHeader(label: String) -> NSMutableAttributedString {
+        let attr = NSMutableAttributedString()
+        attr.append(NSAttributedString(string: label, attributes: Self.heading))
+        return attr
+    }
+
     static func attributed(label: String) -> NSMutableAttributedString {
         var result = NSMutableAttributedString()
         result = Self.appendLabelAttribute(attr: result, string: label)

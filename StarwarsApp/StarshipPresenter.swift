@@ -21,6 +21,8 @@ struct StarshipPresenter: CustomStringConvertible, CustomReflectable, Presentabl
             "consumables": consumables,
             "createDate": createDate,
             "editedDate": editedDate,
+            "pilots": pilots,
+            "films": films,
         ])
     }
     
@@ -71,6 +73,16 @@ struct StarshipPresenter: CustomStringConvertible, CustomReflectable, Presentabl
         PresenterAttr.attributed(label: "Consumables", value: model.consumables)
     }
     
+    var films: [NSAttributedString] {
+        [PresenterAttr.attributedHeader(label: "Films")]
+            + model.films.map { PresenterAttr.attributed(label: $0.description ) }
+    }
+    
+    var pilots: [NSAttributedString] {
+        [PresenterAttr.attributedHeader(label: "Pilots")]
+            + model.pilots.map { PresenterAttr.attributed(label: $0.description ) }
+    }
+
     var createDate: NSAttributedString {
         PresenterAttr.attributed(label: "Release Date", value: PresenterAttr.dateFormatter.string(from: model.created))
     }

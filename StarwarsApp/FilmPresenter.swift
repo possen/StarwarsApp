@@ -17,7 +17,11 @@ struct FilmPresenter: CustomStringConvertible, CustomReflectable, Presentable {
             "openingCrawl": openingCrawl,
             "releaseDate": releaseDate,
             "createDate": createDate,
-            "editedDate": editedDate
+            "editedDate": editedDate,
+            "characters": characters,
+            "vehicles": vehicles,
+            "species": species,
+            "starships": starships
         ])
     }
 
@@ -66,4 +70,30 @@ struct FilmPresenter: CustomStringConvertible, CustomReflectable, Presentable {
     var editedDate: NSAttributedString {
         PresenterAttr.attributed(label: "Release Date", value: PresenterAttr.dateFormatter.string(from: model.edited))
     }
+    
+    var planets: [NSAttributedString] {
+        [PresenterAttr.attributedHeader(label: "Planets")]
+            + model.planets.map { PresenterAttr.attributed(label: $0.description ) }
+    }
+    
+    var characters: [NSAttributedString] {
+        [PresenterAttr.attributedHeader(label: "Characters")]
+            + model.characters.map { PresenterAttr.attributed(label: $0.description ) }
+    }
+    
+    var vehicles: [NSAttributedString] {
+        [PresenterAttr.attributedHeader(label: "Vehicles")]
+            + model.vehicles.map { PresenterAttr.attributed(label: $0.description ) }
+    }
+    
+    var species: [NSAttributedString] {
+        [PresenterAttr.attributedHeader(label: "Species")]
+            + model.species.map { PresenterAttr.attributed(label: $0.description ) }
+    }
+    
+    var starships: [NSAttributedString] {
+        [PresenterAttr.attributedHeader(label: "Starships")]
+            + model.starships.map { PresenterAttr.attributed(label: $0.description ) }
+    }
+
 }

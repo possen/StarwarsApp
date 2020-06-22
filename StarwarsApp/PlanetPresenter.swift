@@ -19,10 +19,11 @@ struct PlanetPresenter: CustomStringConvertible, CustomReflectable, Presentable 
             "gravity": gravity,
             "terrain": terrain,
             "surfaceWater": surfaceWater,
-            "population": population,
             "createDate": createDate,
             "editedDate": editedDate,
-
+            "population": population,
+            "films": films,
+            "residents": residents,
         ])
     }
 
@@ -75,7 +76,17 @@ struct PlanetPresenter: CustomStringConvertible, CustomReflectable, Presentable 
     var population: NSAttributedString {
         PresenterAttr.attributed(label: "Population", value: model.population)
     }
-
+    
+    var films: [NSAttributedString] {
+        [PresenterAttr.attributedHeader(label: "Films")]
+            + model.films.map { PresenterAttr.attributed(label: $0.description ) }
+    }
+        
+    var residents: [NSAttributedString] {
+        [PresenterAttr.attributedHeader(label: "Residents")]
+            + model.residents.map { PresenterAttr.attributed(label: $0.description ) }
+    }
+    
     var createDate: NSAttributedString {
         PresenterAttr.attributed(label: "Release Date", value: PresenterAttr.dateFormatter.string(from: model.created))
     }

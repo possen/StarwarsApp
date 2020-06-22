@@ -21,8 +21,11 @@ struct PersonPresenter: CustomStringConvertible, CustomReflectable, Presentable 
             "skinColor": skinColor,
             "created": created,
             "edited": edited,
+            "link": link,
+            "vehicles": vehicles,
             "films": films,
-            "link": link
+            "starships": starships,
+            "species": species
         ])
     }
     
@@ -73,10 +76,26 @@ struct PersonPresenter: CustomStringConvertible, CustomReflectable, Presentable 
         PresenterAttr.attributed(label: "Edited", value: PresenterAttr.dateFormatter.string(from: model.edited))
     }
     
-    var films: NSAttributedString {
-        PresenterAttr.attributed(label: "Films")
+    var films: [NSAttributedString] {
+        [PresenterAttr.attributedHeader(label: "Films")]
+            + model.films.map { PresenterAttr.attributed(label: $0.description ) }
     }
     
+    var vehicles: [NSAttributedString] {
+        [PresenterAttr.attributedHeader(label: "Vehicles")]
+            + model.vehicles.map { PresenterAttr.attributed(label: $0.description ) }
+    }
+    
+    var species: [NSAttributedString] {
+        [PresenterAttr.attributedHeader(label: "Species")]
+            + model.species.map { PresenterAttr.attributed(label: $0.description ) }
+    }
+    
+    var starships: [NSAttributedString] {
+        [PresenterAttr.attributedHeader(label: "Starships")]
+            + model.starships.map { PresenterAttr.attributed(label: $0.description ) }
+    }
+
     var link: NSAttributedString {
         PresenterAttr.attributed(label: "Link", value: model.url.path)
     }

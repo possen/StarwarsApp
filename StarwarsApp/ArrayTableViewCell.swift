@@ -1,15 +1,15 @@
 //
-//  TableViewCell.swift
+//  ArrayTableViewCell.swift
 //  StarwarsApp
 //
-//  Created by Paul Ossenbruggen on 6/18/20.
+//  Created by Paul Ossenbruggen on 6/22/20.
 //  Copyright © 2020 Paul Ossenbruggen. All rights reserved.
 //
 
 import UIKit
 
-class DetailTableViewCell: UITableViewCell {
-    var item: Presentable?
+class ArrayTableViewCell: UITableViewCell {
+    var item: [NSAttributedString] = []
 
     override func awakeFromNib() {
         super.awakeFromNib()
