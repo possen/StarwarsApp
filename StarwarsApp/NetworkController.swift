@@ -102,93 +102,71 @@ struct NetworkController {
         let count: Int
         switch selectedScope {
         case 0:
-            var result = try search(queryType: People.self, filter: filter, page: page)
-            var nextResult = result
+            var result = People(count: 0, next: nil, results: [])
             var page = 1
-            while result.results.count < result.count {
-                nextResult = try search(queryType: People.self, filter: filter, page: page)
+            repeat {
+                let nextResult = try search(queryType: People.self, filter: filter, page: page)
                 result.results += nextResult.results
+                result.count = nextResult.count
                 page += 1
-            }
-            var prev = ""
-            result.results = result.results.sorted { $0.name < $1.name }.filter {
-                let result = prev != $0.name
-                prev = $0.name
-                return result
-            }
+            } while result.results.count < result.count
+            result.results = result.results.uniqued().sorted { $0.name < $1.name }
             (count, final) = (result.count, result.results.map { QueryItem.person($0) })
         case 1:
-            var result = try search(queryType: Planets.self, filter: filter, page: page)
-            var nextResult = result
+            var result = Planets(count: 0, next: nil, results: [])
             var page = 1
-            while result.results.count < result.count {
-                nextResult = try search(queryType: Planets.self, filter: filter, page: page)
+            repeat {
+                let nextResult = try search(queryType: Planets.self, filter: filter, page: page)
                 result.results += nextResult.results
+                result.count = nextResult.count
                 page += 1
-            }
-            var prev = ""
-            result.results = result.results.sorted { $0.name < $1.name }.filter {
-                let result = prev != $0.name
-                prev = $0.name
-                return result
-            }
-            result.results.sort { $0.name < $1.name }
+            } while result.results.count < result.count
+            result.results = result.results.uniqued().sorted { $0.name < $1.name }
             (count, final) = (result.count, result.results.map { QueryItem.planet($0) })
         case 2:
-            var result = try search(queryType: Films.self, filter: filter, page: page)
-            var nextResult = result
+            var result = Films(count: 0, next: nil, results: [])
             var page = 1
-            while result.results.count < result.count {
-                nextResult = try search(queryType: Films.self, filter: filter, page: page)
+            repeat {
+                let nextResult = try search(queryType: Films.self, filter: filter, page: page)
                 result.results += nextResult.results
+                result.count = nextResult.count
                 page += 1
-            }
-            var prev = ""
-            result.results = result.results.sorted { $0.title < $1.title }.filter {
-                let result = prev != $0.title
-                prev = $0.title
-                return result
-            }
-            result.results.sort { $0.title < $1.title }
+            } while result.results.count < result.count
+            result.results = result.results.uniqued().sorted { $0.title < $1.title }
             (count, final) = (result.count, result.results.map { QueryItem.film($0) })
         case 3:
-            var result = try search(queryType: Vehicles.self, filter: filter, page: page)
-            var nextResult = result
+            var result = Vehicles(count: 0, next: nil, results: [])
             var page = 1
-            while result.results.count < result.count {
-                nextResult = try search(queryType: Vehicles.self, filter: filter, page: page)
+            repeat {
+                let nextResult = try search(queryType: Vehicles.self, filter: filter, page: page)
                 result.results += nextResult.results
+                result.count = nextResult.count
                 page += 1
-            }
-            var prev = ""
-            result.results = result.results.sorted { $0.name < $1.name }.filter {
-                let result = prev != $0.name
-                prev = $0.name
-                return result
-            }
-            result.results.sort { $0.name < $1.name }
+            } while result.results.count < result.count
+            result.results = result.results.uniqued().sorted { $0.name < $1.name }
             (count, final) = (result.count, result.results.map { QueryItem.vehicle($0) })
         case 4:
-            var result = try search(queryType: Starships.self, filter: filter, page: page)
-            var nextResult = result
+            var result = Starships(count: 0, next: nil, results: [])
             var page = 1
-            while result.results.count < result.count {
-                nextResult = try search(queryType: Starships.self, filter: filter, page: page)
+            repeat {
+                let nextResult = try search(queryType: Starships.self, filter: filter, page: page)
                 result.results += nextResult.results
+                result.count = nextResult.count
                 page += 1
-            }
-            var prev = ""
-            result.results = result.results.sorted { $0.name < $1.name }.filter {
-                let result = prev != $0.name
-                prev = $0.name
-                return result
-            }
-            result.results.sort { $0.name < $1.name }
+            } while result.results.count < result.count
+             result.results = result.results.uniqued().sorted { $0.name < $1.name }
             (count, final) = (result.count, result.results.map { QueryItem.starship($0) })
         default: fatalError()
         }
         cached[selectedScope] = final
         return (count, final)
+    }
+}
+
+public extension Array where Element: Hashable {
+    func uniqued() -> [Element] {
+        var seen = Set<Element>()
+        return filter{ seen.insert($0).inserted }
     }
 }
 

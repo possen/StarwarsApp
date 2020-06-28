@@ -9,7 +9,7 @@
 import Foundation
 
 struct Planets: Decodable {
-    let count: Int
+    var count: Int
     let next: URL?
     var results: [Planet]
 }

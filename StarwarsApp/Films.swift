@@ -9,7 +9,7 @@
 import Foundation
 
 struct Films: Decodable {
-    let count: Int
+    var count: Int
     let next: URL?
     var results: [Film]
 }
