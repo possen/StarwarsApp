@@ -44,7 +44,7 @@ struct FilmPresenter: CustomStringConvertible, CustomReflectable, Presentable {
     }
     
     var episodeId: NSAttributedString {
-        PresenterAttr.attributed(label: "Episode", value: String(model.episodeId))
+        PresenterAttr.attributed(label: "Episode", value: String(model.episodeID))
     }
     
     var openingCrawl: NSAttributedString {

@@ -25,6 +25,24 @@ struct Vehicle: Decodable, CustomStringConvertible, Hashable {
     }
     private let identifier = UUID()
 
+    enum CodingKeys: String, CodingKey {
+        case name
+        case model
+        case vehicleClass
+        case manufacturer
+        case length
+        case costInCredits
+        case crew
+        case passengers
+        case maxAtmospheringSpeed
+        case cargoCapacity
+        case pilots
+        case films
+        case created
+        case edited
+        case url
+    }
+    
     let name: String
     let model: String
     let vehicleClass: String

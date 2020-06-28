@@ -22,8 +22,29 @@ struct Starship: Decodable, CustomStringConvertible, Hashable {
     func hash(into hasher: inout Hasher) {
         hasher.combine(self.identifier)
     }
+    
     private let identifier = UUID()
 
+    enum CodingKeys: String, CodingKey {
+        case name
+        case model
+        case manufacturer
+        case costInCredits
+        case length
+        case crew
+        case passengers
+        case maxAtmospheringSpeed
+        case hyperdriveRating
+        case MGLT
+        case cargoCapacity
+        case consumables
+        case films
+        case pilots
+        case created
+        case edited
+        case url
+    }
+    
     let name: String
     let model: String
     let manufacturer: String

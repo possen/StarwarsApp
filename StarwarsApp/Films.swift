@@ -22,10 +22,28 @@ struct Film: Decodable, CustomStringConvertible, Hashable {
     func hash(into hasher: inout Hasher) {
         hasher.combine(self.identifier)
     }
-    private let identifier = UUID()
     
+    enum CodingKeys: String, CodingKey {
+        case title
+        case episodeID = "episodeId"
+        case openingCrawl
+        case director
+        case producer
+        case releaseDate
+        case species
+        case starships
+        case vehicles
+        case characters
+        case planets
+        case created
+        case edited
+        case url
+    }
+    
+    private let identifier = UUID()
+
     let title: String
-    let episodeId: Int
+    let episodeID: Int
     let openingCrawl: String
     let director: String
     let producer: String

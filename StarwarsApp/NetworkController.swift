@@ -93,13 +93,15 @@ struct NetworkController {
         )
         return try request.perform(parameters: ["search": filter, "page": String(page)]).await()
     }
-    
+        
     mutating func search(selectedScope: Int, filter: String, page: Int) throws -> (Int, [QueryItem]) {
+        guard cached[selectedScope].isEmpty else {
+            return (cached[selectedScope].count, cached[selectedScope])
+        }
+        let final: [QueryItem]
+        let count: Int
         switch selectedScope {
         case 0:
-            guard cached[selectedScope].isEmpty else {
-                return (cached[selectedScope].count, cached[selectedScope])
-            }
             var result = try search(queryType: People.self, filter: filter, page: page)
             var nextResult = result
             var page = 1
@@ -114,13 +116,8 @@ struct NetworkController {
                 prev = $0.name
                 return result
             }
-            let final = result.results.map { QueryItem.person($0) }
-            cached[selectedScope] = final
-            return (result.count, final)
+            (count, final) = (result.count, result.results.map { QueryItem.person($0) })
         case 1:
-            guard cached[selectedScope].isEmpty else {
-                return (cached[selectedScope].count, cached[selectedScope])
-            }
             var result = try search(queryType: Planets.self, filter: filter, page: page)
             var nextResult = result
             var page = 1
@@ -136,13 +133,8 @@ struct NetworkController {
                 return result
             }
             result.results.sort { $0.name < $1.name }
-            let final = result.results.map { QueryItem.planet($0) }
-            cached[selectedScope] = final
-            return (result.count, final)
+            (count, final) = (result.count, result.results.map { QueryItem.planet($0) })
         case 2:
-            guard cached[selectedScope].isEmpty else {
-                return (cached[selectedScope].count, cached[selectedScope])
-            }
             var result = try search(queryType: Films.self, filter: filter, page: page)
             var nextResult = result
             var page = 1
@@ -158,13 +150,8 @@ struct NetworkController {
                 return result
             }
             result.results.sort { $0.title < $1.title }
-            let final = result.results.map { QueryItem.film($0) }
-            cached[selectedScope] = final
-            return (result.count, final)
+            (count, final) = (result.count, result.results.map { QueryItem.film($0) })
         case 3:
-            guard cached[selectedScope].isEmpty else {
-                return (cached[selectedScope].count, cached[selectedScope])
-            }
             var result = try search(queryType: Vehicles.self, filter: filter, page: page)
             var nextResult = result
             var page = 1
@@ -180,13 +167,8 @@ struct NetworkController {
                 return result
             }
             result.results.sort { $0.name < $1.name }
-            let final = result.results.map { QueryItem.vehicle($0) }
-            cached[selectedScope] = final
-            return (result.count, final)
+            (count, final) = (result.count, result.results.map { QueryItem.vehicle($0) })
         case 4:
-            guard cached[selectedScope].isEmpty else {
-                return (cached[selectedScope].count, cached[selectedScope])
-            }
             var result = try search(queryType: Starships.self, filter: filter, page: page)
             var nextResult = result
             var page = 1
@@ -202,11 +184,11 @@ struct NetworkController {
                 return result
             }
             result.results.sort { $0.name < $1.name }
-            let final = result.results.map { QueryItem.starship($0) }
-            cached[selectedScope] = final
-            return (result.count, final)
+            (count, final) = (result.count, result.results.map { QueryItem.starship($0) })
         default: fatalError()
         }
+        cached[selectedScope] = final
+        return (count, final)
     }
 }
 

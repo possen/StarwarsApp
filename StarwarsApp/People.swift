@@ -23,6 +23,23 @@ struct Person: Decodable, CustomStringConvertible, Hashable {
     func hash(into hasher: inout Hasher) {
         hasher.combine(self.identifier)
     }
+    
+    enum CodingKeys: String, CodingKey {
+        case name
+        case birthYear
+        case eyeColor
+        case height
+        case mass
+        case skinColor
+        case homeworld
+        case films
+        case species
+        case starships
+        case vehicles
+        case created
+        case edited
+        case url
+    }
  
     private let identifier = UUID()
     let name: String

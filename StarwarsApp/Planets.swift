@@ -25,6 +25,23 @@ struct Planet: Decodable, CustomStringConvertible, Hashable {
     }
     private let identifier = UUID()
 
+    enum CodingKeys: String, CodingKey {
+        case name
+        case rotationPeriod
+        case orbitalPeriod
+        case diameter
+        case climate
+        case gravity
+        case terrain
+        case surfaceWater
+        case population
+        case residents
+        case films
+        case created
+        case edited
+        case url
+    }
+    
     let name: String
     let rotationPeriod: String
     let orbitalPeriod: String
