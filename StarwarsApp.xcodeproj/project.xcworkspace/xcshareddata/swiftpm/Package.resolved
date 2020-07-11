@@ -6,7 +6,7 @@
         "repositoryURL": "git@github.com:possen/ResonanceKit.git",
         "state": {
           "branch": "master",
-          "revision": "8894d1c65c9a2d55a579ace32a851c448ffb14be",
+          "revision": "b9385211f8b981173c2580e226c6b8c1cab3e378",
           "version": null
         }
       },
@@ -15,8 +15,8 @@
         "repositoryURL": "https://github.com/belozierov/SwiftCoroutine.git",
         "state": {
           "branch": null,
-          "revision": "e02d8b6a0a103a930029fa058bbc5ee8053a2a57",
-          "version": "2.1.4"
+          "revision": "19e8f993a683bcae57b19de7b221f6dbddbe1b69",
+          "version": "2.1.8"
         }
       },
       {

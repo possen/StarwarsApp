@@ -100,6 +100,8 @@ struct NetworkController {
         }
         let final: [QueryItem]
         let count: Int
+        // These are all distinct types, I don't like the repetition here but I don't see an easy way to
+        // simplify this. 
         switch selectedScope {
         case 0:
             var result = People(count: 0, next: nil, results: [])

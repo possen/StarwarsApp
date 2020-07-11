@@ -3,6 +3,7 @@
 
 ## How to use
 - Best on iPad in landscape but works on other devices
+- Works well on Mac Catalyst. 
 - Click on categories on search field
 - Click on item of interest
 - Type in search field to filter
@@ -10,17 +11,15 @@
 ## How to Build
 - Should just work, after a delay getting the SPM packages. 
 - Please let me know if you have any difficulty building, it is working for me,
-- I am building with Xcode 11.5
+- I am building with Xcode 12
 
 ## Design
 - Decided to go with master detail layout.
-- I tried to be careful about separating model, view and controller layers
-- was careful about dependencies so the imports reflect what is actually needed. 
-- Followed Single Responsiblity principle, this can be seen in Presenter objects separation from model objects.
-- I did not try to handle links to other types although it would be pretty easy to add links on the attributed text. I added link in one place but it does not go anywhere.
+- Using DiffableDataSources. 
+- Pulls all requests at once so filtering can happen locally and to save quota limits on server.
+- Careful about separating model, view and controller layers
+- Dependencies so the imports reflect what is actually needed. 
 - Major changes to use DiffableDataSources providing nice animations when querying and switching tabs.
-- Now caches the requests to avoid hitting server limites.
-- Queries are peformed locally
 - Can navigate into film links, not working
 
 ## Testing
