@@ -15,7 +15,6 @@ class MasterTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        textLabel?.textColor = .white
     }
     
     override func prepareForReuse() {
