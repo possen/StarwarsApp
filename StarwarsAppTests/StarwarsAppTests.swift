@@ -165,7 +165,4 @@ class StarwarsAppTests: XCTestCase {
         }
         wait(for: [exp], timeout: 30)
     }
-
-
-
 }
