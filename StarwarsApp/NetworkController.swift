@@ -47,9 +47,14 @@ enum QueryItem: Hashable, CustomStringConvertible {
     }
 }
 
+protocol Processor {
+    func process(_ filter: String) throws -> (Int, [QueryItem])
+}
+
 struct NetworkController {
     let session: JSONSession
     var cached = [[QueryItem]](repeating: [], count: 5)
+    var processors: [Processor] = []
     
     public enum Failures: Error {
         case badDateFormat
@@ -93,75 +98,15 @@ struct NetworkController {
         )
         return try request.perform(parameters: ["search": filter, "page": String(page)]).await()
     }
-        
+            
     mutating func search(selectedScope: Int, filter: String, page: Int) throws -> (Int, [QueryItem]) {
         guard cached[selectedScope].isEmpty else {
             return (cached[selectedScope].count, cached[selectedScope])
         }
-        let final: [QueryItem]
-        let count: Int
-        // These are all distinct types, I don't like the repetition here but I don't see an easy way to
-        // simplify this. 
-        switch selectedScope {
-        case 0:
-            var result = People(count: 0, next: nil, results: [])
-            var page = 1
-            repeat {
-                let nextResult = try search(queryType: People.self, filter: filter, page: page)
-                result.results += nextResult.results
-                result.count = nextResult.count
-                page += 1
-            } while result.results.count < result.count
-            result.results = result.results.uniqued().sorted { $0.name < $1.name }
-            (count, final) = (result.count, result.results.map { QueryItem.person($0) })
-        case 1:
-            var result = Planets(count: 0, next: nil, results: [])
-            var page = 1
-            repeat {
-                let nextResult = try search(queryType: Planets.self, filter: filter, page: page)
-                result.results += nextResult.results
-                result.count = nextResult.count
-                page += 1
-            } while result.results.count < result.count
-            result.results = result.results.uniqued().sorted { $0.name < $1.name }
-            (count, final) = (result.count, result.results.map { QueryItem.planet($0) })
-        case 2:
-            var result = Films(count: 0, next: nil, results: [])
-            var page = 1
-            repeat {
-                let nextResult = try search(queryType: Films.self, filter: filter, page: page)
-                result.results += nextResult.results
-                result.count = nextResult.count
-                page += 1
-            } while result.results.count < result.count
-            result.results = result.results.uniqued().sorted { $0.title < $1.title }
-            (count, final) = (result.count, result.results.map { QueryItem.film($0) })
-        case 3:
-            var result = Vehicles(count: 0, next: nil, results: [])
-            var page = 1
-            repeat {
-                let nextResult = try search(queryType: Vehicles.self, filter: filter, page: page)
-                result.results += nextResult.results
-                result.count = nextResult.count
-                page += 1
-            } while result.results.count < result.count
-            result.results = result.results.uniqued().sorted { $0.name < $1.name }
-            (count, final) = (result.count, result.results.map { QueryItem.vehicle($0) })
-        case 4:
-            var result = Starships(count: 0, next: nil, results: [])
-            var page = 1
-            repeat {
-                let nextResult = try search(queryType: Starships.self, filter: filter, page: page)
-                result.results += nextResult.results
-                result.count = nextResult.count
-                page += 1
-            } while result.results.count < result.count
-             result.results = result.results.uniqued().sorted { $0.name < $1.name }
-            (count, final) = (result.count, result.results.map { QueryItem.starship($0) })
-        default: fatalError()
-        }
-        cached[selectedScope] = final
-        return (count, final)
+        let processor = processors[selectedScope]
+        let (count, items) = try processor.process(filter)
+        cached[selectedScope] = items
+        return (count, items)
     }
 }
 

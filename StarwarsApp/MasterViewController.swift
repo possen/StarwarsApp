@@ -12,12 +12,12 @@ import SwiftCoroutine
 class MasterViewController: UITableViewController {
     static let reuseID = "MasterCell"
     @IBOutlet weak var searchBar: UISearchBar!
-    var networkController = NetworkController()
     var detailViewController: DetailTableViewController? = nil
     var dataSource: UITableViewDiffableDataSource<Section, QueryItem>! = nil
     var currentSnapshot: NSDiffableDataSourceSnapshot<Section, QueryItem>! = nil
     var selectedScope: Int = 0
     var items: [QueryItem] = []
+    var networkController: NetworkController!
     
     enum Section {
         case main
@@ -25,6 +25,15 @@ class MasterViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        networkController = NetworkController()
+        let processors: [Processor] = [
+            PeopleProcessor(networkController: networkController),
+            PlanetsProcessor(networkController: networkController),
+            FilmsProcessor(networkController: networkController),
+            VehicleProcesor(networkController: networkController),
+            StarshipProcessor(networkController: networkController)
+        ]
+        networkController.processors = processors
         searchBar.delegate = self
         currentSnapshot = NSDiffableDataSourceSnapshot<Section, QueryItem>()
         dataSource = UITableViewDiffableDataSource<Section, QueryItem>(tableView: tableView) { tableView, indexPath, item in
